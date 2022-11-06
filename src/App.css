@@ -2,15 +2,15 @@
   text-align: center;
 }
 
-.App-logo {
+.App-loading {
   height: 40vmin;
   pointer-events: none;
   border-radius: 50%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .App-loading {
+    animation: App-logo-spin infinite 4s linear;
   }
 }
 

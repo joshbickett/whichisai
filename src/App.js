@@ -1,4 +1,5 @@
 import logo from "./assets/robot.png";
+import loadingImg from "./assets/loading.png";
 import "./App.css";
 import { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import { getAIImage, getNormalImages } from "./api";
@@ -26,15 +27,24 @@ const App = () => {
     []
   );
 
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const startGame = async () => {
     setShowButton(false);
+    setLoading(true);
     console.log("Button clicked");
     let normalImgs = await getNormalImages();
     let aiImages = await getAIImage();
+    console.log("ai images", aiImages);
 
     const imgs = createImgArray(normalImgs, aiImages);
     console.log("updated imgs", imgs);
-    setImages(imgs);
+
+    setTimeout(() => {
+      setLoading(false);
+      setImages(imgs);
+    }, 2000);
   };
 
   const createImgArray = (normalImgs, aiImages) => {
@@ -50,15 +60,13 @@ const App = () => {
       };
     });
     imgArr.push({
-      url: randomAIImage.src,
+      url: randomAIImage.srcSmall,
       isAI: true,
     });
     imgArr = imgArr.sort(() => Math.random() - 0.5);
 
     return imgArr;
   };
-
-  const [images, setImages] = useState([]);
 
   const [showButton, setShowButton] = useState(true);
   const showButtonRef = useRef(showButton);
@@ -133,11 +141,11 @@ const App = () => {
           PLAY
         </button>
       )}
-      {!showButton && images !== [] && (
+      {!showButton && (
         <div
           style={{
             margin: "50px 100px",
-            border: "5px solid black",
+
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -170,6 +178,14 @@ const App = () => {
               }}
             />
           ))}
+          {loading && (
+            <img
+              src={loadingImg}
+              alt="loading"
+              class="App-loading"
+              style={{ width: "100px", height: "100px", border: "50%" }}
+            />
+          )}
         </div>
       )}
     </div>

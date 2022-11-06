@@ -4,7 +4,7 @@ export const getAIImage = async (search) => {
   // make a GET request to the following endpoint => https://lexica.art/api/v1/search?q=apples
   // const url = `https://lexica.art/api/v1/search?q=${search}`;
   return new Promise(async (resolve, reject) => {
-    const url = `https://lexica.art/api/v1/search?q=books`;
+    const url = `https://lexica.art/api/v1/search?q=photo realistic image of books`;
 
     const response = await fetch(url);
     const data = await response.json();
@@ -18,7 +18,7 @@ export const getAIImage = async (search) => {
 export const getNormalImages = async (search) => {
   console.log("key", key);
 
-  const url = `https://api.unsplash.com/search/photos?query=books&client_id=${key}`;
+  const url = `https://api.unsplash.com/search/photos?query=animation books&client_id=${key}`;
   return new Promise(async (resolve, reject) => {
     const response = await fetch(url);
     const data = await response.json();
