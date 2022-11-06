@@ -1,6 +1,7 @@
 import logo from "./assets/robot.png";
 import "./App.css";
-import { useEffect, useState, useRef, useCallback, useMemo } from "react";
+import { useState, useRef, useCallback, useMemo } from "react";
+import { getAIImage } from "./api";
 
 const App = () => {
   const gradient = useMemo(
@@ -25,9 +26,13 @@ const App = () => {
     []
   );
 
-  const startGame = () => {
+  const startGame = async () => {
     setShowButton(false);
     console.log("Button clicked");
+    const images = await getAIImage();
+    console.log("images123", images);
+    const imageArray = images.map((image) => image.src);
+    console.log("image urls", imageArray);
   };
 
   const [showButton, setShowButton] = useState(true);
@@ -53,10 +58,6 @@ const App = () => {
     },
     [gradient]
   );
-
-  useEffect(() => {
-    updateButtonColor(0);
-  }, [updateButtonColor]);
 
   return (
     <div
