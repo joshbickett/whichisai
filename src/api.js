@@ -16,7 +16,7 @@ export const getAIImage = async (search) => {
 export const getNormalImages = async (search) => {
   console.log("key", key);
 
-  const url = `https://api.unsplash.com/search/photos?query=${search}&client_id=${key}`;
+  const url = `https://api.unsplash.com/search/photos?query=${search} cartoon&client_id=${key}`;
   return new Promise(async (resolve, reject) => {
     const response = await fetch(url);
     const data = await response.json();

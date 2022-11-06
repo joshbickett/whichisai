@@ -30,17 +30,20 @@ const App = () => {
 
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [topic, setTopic] = useState("");
 
   const startGame = async () => {
     setShowButton(false);
     setLoading(true);
     const newTopic = getTopic();
+
     let normalImgs = await getNormalImages(newTopic);
     let aiImages = await getAIImage(newTopic);
 
     const imgs = createImgArray(normalImgs, aiImages);
 
     setTimeout(() => {
+      setTopic(newTopic);
       setLoading(false);
       setImages(imgs);
     }, 2000);
@@ -111,11 +114,15 @@ const App = () => {
         alt="logo"
         style={{ width: "100px", borderRadius: "35px" }}
       />
+
       <h1 style={{ margin: 0, padding: 0 }}>Weird Web</h1>
-      <h3 style={{ margin: "15px", padding: 0 }}>The game</h3>
-      <p style={{ margin: 0, padding: 0 }}>
-        Find the AI-generated image out of the images displayed
-      </p>
+      {showButton && <h3 style={{ margin: "15px", padding: 0 }}>The game</h3>}
+
+      {showButton && (
+        <p style={{ margin: 0, padding: 0 }}>
+          Find the AI-generated image out of the images displayed
+        </p>
+      )}
       {showButton && (
         <button
           style={{
@@ -141,6 +148,7 @@ const App = () => {
           PLAY
         </button>
       )}
+      {topic && <h4>{topic}</h4>}
       {!showButton && (
         <div
           style={{
