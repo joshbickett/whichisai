@@ -1,26 +1,29 @@
 import logo from "./assets/robot.png";
 import "./App.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 
 const App = () => {
-  const gradient = [
-    "#000000",
-    "#0a0a0a",
-    "#141414",
-    "#1f1f1f",
-    "#292929",
-    "#333333",
-    "#3d3d3d",
-    "#474747",
-    "#515151",
-    "#5b5b5b",
-    "#666666",
-    "#707070",
-    "#7a7a7a",
-    "#848484",
-    "#8e8e8e",
-    "#999999",
-  ];
+  const gradient = useMemo(
+    () => [
+      "#000000",
+      "#0a0a0a",
+      "#141414",
+      "#1f1f1f",
+      "#292929",
+      "#333333",
+      "#3d3d3d",
+      "#474747",
+      "#515151",
+      "#5b5b5b",
+      "#666666",
+      "#707070",
+      "#7a7a7a",
+      "#848484",
+      "#8e8e8e",
+      "#999999",
+    ],
+    []
+  );
 
   const startGame = () => {
     setShowButton(false);
@@ -33,24 +36,27 @@ const App = () => {
 
   const directionRef = useRef("up");
 
+  const updateButtonColor = useCallback(
+    (index) => {
+      if (!showButtonRef.current) return;
+      const newColor = gradient[index];
+
+      document.getElementById("play-button").style.backgroundColor = newColor;
+
+      if (index === gradient.length - 1) directionRef.current = "down";
+      else if (index === 0) directionRef.current = "up";
+
+      setTimeout(() => {
+        if (directionRef.current === "up") updateButtonColor(index + 1);
+        else updateButtonColor(index - 1);
+      }, 20);
+    },
+    [gradient]
+  );
+
   useEffect(() => {
     updateButtonColor(0);
-  }, []);
-
-  const updateButtonColor = (index) => {
-    if (!showButtonRef.current) return;
-    const newColor = gradient[index];
-
-    document.getElementById("play-button").style.backgroundColor = newColor;
-
-    if (index === gradient.length - 1) directionRef.current = "down";
-    else if (index === 0) directionRef.current = "up";
-
-    setTimeout(() => {
-      if (directionRef.current === "up") updateButtonColor(index + 1);
-      else updateButtonColor(index - 1);
-    }, 20);
-  };
+  }, [updateButtonColor]);
 
   return (
     <div
@@ -99,6 +105,7 @@ const App = () => {
           PLAY
         </button>
       )}
+      {!showButton && <div>stuff</div>}
     </div>
   );
 };
