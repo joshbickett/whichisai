@@ -47,12 +47,8 @@ const App = () => {
   }, []);
 
   const updateButtonColor = (index) => {
-    let direction;
-    console.log("index", index);
-    console.log("direction", direction);
-
     const newColor = gradient[index];
-    console.log("newColor", newColor);
+
     document.getElementById("play-button").style.backgroundColor = newColor;
 
     if (index === gradient.length - 1) directionRef.current = "down";
