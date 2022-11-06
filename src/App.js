@@ -34,8 +34,9 @@ const App = () => {
     setShowButton(false);
     setLoading(true);
     console.log("Button clicked");
-    let normalImgs = await getNormalImages();
-    let aiImages = await getAIImage();
+    const search = "bananas";
+    let normalImgs = await getNormalImages(search);
+    let aiImages = await getAIImage(search);
     console.log("ai images", aiImages);
 
     const imgs = createImgArray(normalImgs, aiImages);
@@ -59,8 +60,11 @@ const App = () => {
         isAI: false,
       };
     });
+
+    const imageSmall = randomAIImage.srcSmall;
+    console.log("image small", imageSmall);
     imgArr.push({
-      url: randomAIImage.srcSmall,
+      url: imageSmall,
       isAI: true,
     });
     imgArr = imgArr.sort(() => Math.random() - 0.5);
@@ -182,7 +186,7 @@ const App = () => {
             <img
               src={loadingImg}
               alt="loading"
-              class="App-loading"
+              className="App-loading"
               style={{ width: "100px", height: "100px", border: "50%" }}
             />
           )}
