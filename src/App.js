@@ -1,7 +1,7 @@
 import logo from "./assets/robot.png";
 import "./App.css";
 import { useState, useRef, useCallback, useMemo, useEffect } from "react";
-import { getAIImage } from "./api";
+import { getAIImage, getNormalImages } from "./api";
 
 const App = () => {
   const gradient = useMemo(
@@ -29,12 +29,14 @@ const App = () => {
   const startGame = async () => {
     setShowButton(false);
     console.log("Button clicked");
-    let img = await getAIImage();
-    // change the order of the array to random
-    img = img.sort(() => Math.random() - 0.5);
-    img = img.slice(0, 15);
-    console.log("img", images);
-    setImages(img);
+    let img = await getNormalImages();
+    console.log("img", img);
+    //   let img = await getAIImage();
+    //   // change the order of the array to random
+    //   img = img.sort(() => Math.random() - 0.5);
+    //   img = img.slice(0, 15);
+    //   console.log("img", images);
+    //   setImages(img);
   };
 
   const [images, setImages] = useState([]);
