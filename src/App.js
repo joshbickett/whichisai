@@ -3,6 +3,7 @@ import loadingImg from "./assets/loading.png";
 import "./App.css";
 import { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import { getAIImage, getNormalImages } from "./api";
+import { getTopic } from "./topic";
 
 const App = () => {
   const gradient = useMemo(
@@ -33,9 +34,9 @@ const App = () => {
   const startGame = async () => {
     setShowButton(false);
     setLoading(true);
-    const search = "bananas";
-    let normalImgs = await getNormalImages(search);
-    let aiImages = await getAIImage(search);
+    const newTopic = getTopic();
+    let normalImgs = await getNormalImages(newTopic);
+    let aiImages = await getAIImage(newTopic);
 
     const imgs = createImgArray(normalImgs, aiImages);
 
