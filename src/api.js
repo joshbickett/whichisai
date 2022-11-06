@@ -9,7 +9,6 @@ export const getAIImage = async (search) => {
     console.log("data", data);
 
     const images = data.images;
-    console.log("images", images);
-    return images;
+    resolve(images);
   });
 };
