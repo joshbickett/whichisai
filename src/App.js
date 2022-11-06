@@ -33,14 +33,11 @@ const App = () => {
   const startGame = async () => {
     setShowButton(false);
     setLoading(true);
-    console.log("Button clicked");
     const search = "bananas";
     let normalImgs = await getNormalImages(search);
     let aiImages = await getAIImage(search);
-    console.log("ai images", aiImages);
 
     const imgs = createImgArray(normalImgs, aiImages);
-    console.log("updated imgs", imgs);
 
     setTimeout(() => {
       setLoading(false);
@@ -49,11 +46,9 @@ const App = () => {
   };
 
   const createImgArray = (normalImgs, aiImages) => {
-    console.log("createImgArray");
-    // pick one of the aiImages at random
     let randomIndex = Math.floor(Math.random() * aiImages.length);
     let randomAIImage = aiImages[randomIndex];
-    // reformat normalImg array
+
     let imgArr = normalImgs.map((img) => {
       return {
         url: img.urls.small,
@@ -62,7 +57,7 @@ const App = () => {
     });
 
     const imageSmall = randomAIImage.srcSmall;
-    console.log("image small", imageSmall);
+
     imgArr.push({
       url: imageSmall,
       isAI: true,
