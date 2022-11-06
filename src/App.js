@@ -1,57 +1,67 @@
 import logo from "./assets/robot.png";
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const App = () => {
-  console.log("app");
+  // const gradient = [
+  //   "#000000",
+  //   "#191919",
+  //   "#323232",
+  //   "#4c4c4c",
+  //   "#666666",
+  //   "#7f7f7f",
+  //   "#999999",
+  //   "#b2b2b2",
+  //   "#cccccc",
+  //   "#e5e5e5",
+  //   "#ffffff",
+  // ];
+  // create a much larger gradient for the color change
   const gradient = [
     "#000000",
-    "#191919",
-    "#161616",
+    "#0a0a0a",
     "#141414",
-    "#121212",
-    "#0f0f0f",
-    "#0d0d0d",
-    "#0b0b0b",
-    "#090909",
-    "#070707",
-    "#050505",
-    "#030303",
-    "#010101",
+    "#1f1f1f",
+    "#292929",
+    "#333333",
+    "#3d3d3d",
+    "#474747",
+    "#515151",
+    "#5b5b5b",
+    "#666666",
+    "#707070",
+    "#7a7a7a",
+    "#848484",
+    "#8e8e8e",
+    "#999999",
   ];
 
   const updateButton = () => {
     console.log("Button clicked");
   };
 
-  const [buttonColor, setButtonColor] = useState(gradient[0]);
+  const directionRef = useRef("up");
 
   useEffect(() => {
-    // updateButtonColor(0, "up");
-    console.log("test");
+    updateButtonColor(0);
   }, []);
 
-  const updateButtonColor = (index, direction) => {
+  const updateButtonColor = (index) => {
+    let direction;
     console.log("index", index);
     console.log("direction", direction);
+
     const newColor = gradient[index];
     console.log("newColor", newColor);
-    setButtonColor(gradient[index]);
-    if (index === gradient.length - 1) {
-      console.log("updating direction to *down*");
-      direction = "down";
-    } else if (index === 0) {
-      console.log("updating direction to *up*");
-      direction = "up";
-    }
+    document.getElementById("play-button").style.backgroundColor = newColor;
+
+    if (index === gradient.length - 1) directionRef.current = "down";
+    else if (index === 0) directionRef.current = "up";
 
     setTimeout(() => {
-      if (direction === "up") {
-        updateButtonColor(index + 1, "up");
-      } else {
-        // updateButtonColor(index - 1, "down");
-      }
-    }, 1000);
+      if (directionRef.current === "up") updateButtonColor(index + 1);
+      else updateButtonColor(index - 1);
+    }, 20);
   };
 
   return (
@@ -76,12 +86,12 @@ const App = () => {
         Find the AI-generated image out of the images displayed
       </p>
 
-      <div
+      <button
         style={{
           fontSize: "50px",
           margin: "50px 0",
           padding: "25px",
-          background: buttonColor,
+          backgroundColor: gradient[0],
           color: "white",
           borderRadius: "10px",
           cursor: "pointer",
@@ -97,7 +107,7 @@ const App = () => {
         id="play-button"
       >
         PLAY
-      </div>
+      </button>
     </div>
   );
 };
