@@ -36,9 +36,14 @@ const App = () => {
     "#999999",
   ];
 
-  const updateButton = () => {
+  const startGame = () => {
+    setShowButton(false);
     console.log("Button clicked");
   };
+
+  const [showButton, setShowButton] = useState(true);
+  const showButtonRef = useRef(showButton);
+  showButtonRef.current = showButton;
 
   const directionRef = useRef("up");
 
@@ -47,6 +52,7 @@ const App = () => {
   }, []);
 
   const updateButtonColor = (index) => {
+    if (!showButtonRef.current) return;
     const newColor = gradient[index];
 
     document.getElementById("play-button").style.backgroundColor = newColor;
@@ -82,28 +88,31 @@ const App = () => {
         Find the AI-generated image out of the images displayed
       </p>
 
-      <button
-        style={{
-          fontSize: "50px",
-          margin: "50px 0",
-          padding: "25px",
-          backgroundColor: gradient[0],
-          color: "white",
-          borderRadius: "10px",
-          cursor: "pointer",
-        }}
-        onMouseEnter={() => {
-          const button = document.getElementById("play-button");
-          button.style.scale = "1.1";
-        }}
-        onMouseLeave={() => {
-          const button = document.getElementById("play-button");
-          button.style.scale = "1";
-        }}
-        id="play-button"
-      >
-        PLAY
-      </button>
+      {showButton && (
+        <button
+          style={{
+            fontSize: "50px",
+            margin: "50px 0",
+            padding: "25px",
+            backgroundColor: gradient[0],
+            color: "white",
+            borderRadius: "10px",
+            cursor: "pointer",
+          }}
+          onMouseEnter={() => {
+            const button = document.getElementById("play-button");
+            button.style.scale = "1.1";
+          }}
+          onMouseLeave={() => {
+            const button = document.getElementById("play-button");
+            button.style.scale = "1";
+          }}
+          id="play-button"
+          onClick={() => startGame()}
+        >
+          PLAY
+        </button>
+      )}
     </div>
   );
 };
