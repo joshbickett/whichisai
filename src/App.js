@@ -29,8 +29,11 @@ const App = () => {
   const startGame = async () => {
     setShowButton(false);
     console.log("Button clicked");
-    const img = await getAIImage();
-    console.log("images123", images);
+    let img = await getAIImage();
+    // change the order of the array to random
+    img = img.sort(() => Math.random() - 0.5);
+    img = img.slice(0, 15);
+    console.log("img", images);
     setImages(img);
   };
 
@@ -109,16 +112,36 @@ const App = () => {
           PLAY
         </button>
       )}
-      {!showButton &&
-        images &&
-        images.map((image, index) => (
-          <img
-            src={image.src}
-            key={index}
-            alt="logo"
-            style={{ width: "100px", borderRadius: "35px" }}
-          />
-        ))}
+      {!showButton && images !== [] && (
+        <div
+          style={{
+            margin: "50px 100px",
+            border: "5px solid black",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          {images.map((image, index) => (
+            <img
+              src={image.src}
+              key={index}
+              alt="logo"
+              style={{ width: "150px", margin: "10px", cursor: "pointer" }}
+              onMouseEnter={() => {
+                const img = document.getElementById(`img-${index}`);
+                img.style.scale = "1.1";
+              }}
+              onMouseLeave={() => {
+                const img = document.getElementById(`img-${index}`);
+                img.style.scale = "1";
+              }}
+              id={`img-${index}`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
