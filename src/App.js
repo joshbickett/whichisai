@@ -29,14 +29,33 @@ const App = () => {
   const startGame = async () => {
     setShowButton(false);
     console.log("Button clicked");
-    let img = await getNormalImages();
-    console.log("img", img);
-    // let img = await getAIImage();
-    // change the order of the array to random
-    img = img.sort(() => Math.random() - 0.5);
-    img = img.slice(0, 15);
-    console.log("img", images);
-    setImages(img);
+    let normalImgs = await getNormalImages();
+    let aiImages = await getAIImage();
+
+    const imgs = createImgArray(normalImgs, aiImages);
+    console.log("updated imgs", imgs);
+    setImages(imgs);
+  };
+
+  const createImgArray = (normalImgs, aiImages) => {
+    console.log("createImgArray");
+    // pick one of the aiImages at random
+    let randomIndex = Math.floor(Math.random() * aiImages.length);
+    let randomAIImage = aiImages[randomIndex];
+    // reformat normalImg array
+    let imgArr = normalImgs.map((img) => {
+      return {
+        url: img.urls.small,
+        isAI: false,
+      };
+    });
+    imgArr.push({
+      url: randomAIImage.src,
+      isAI: true,
+    });
+    imgArr = imgArr.sort(() => Math.random() - 0.5);
+
+    return imgArr;
   };
 
   const [images, setImages] = useState([]);
@@ -60,7 +79,7 @@ const App = () => {
       setTimeout(() => {
         if (directionRef.current === "up") updateButtonColor(index + 1);
         else updateButtonColor(index - 1);
-      }, 20);
+      }, 50);
     },
     [gradient]
   );
@@ -127,7 +146,7 @@ const App = () => {
         >
           {images.map((image, index) => (
             <img
-              src={image.src}
+              src={image.url}
               key={index}
               alt="logo"
               style={{ width: "150px", margin: "10px", cursor: "pointer" }}
@@ -140,6 +159,15 @@ const App = () => {
                 img.style.scale = "1";
               }}
               id={`img-${index}`}
+              onClick={() => {
+                console.log("clicked");
+                console.log("image", image);
+                if (image.isAI) {
+                  alert("You win!");
+                } else {
+                  alert("You lose!");
+                }
+              }}
             />
           ))}
         </div>
