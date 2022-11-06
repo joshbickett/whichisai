@@ -31,12 +31,12 @@ const App = () => {
     console.log("Button clicked");
     let img = await getNormalImages();
     console.log("img", img);
-    //   let img = await getAIImage();
-    //   // change the order of the array to random
-    //   img = img.sort(() => Math.random() - 0.5);
-    //   img = img.slice(0, 15);
-    //   console.log("img", images);
-    //   setImages(img);
+    // let img = await getAIImage();
+    // change the order of the array to random
+    img = img.sort(() => Math.random() - 0.5);
+    img = img.slice(0, 15);
+    console.log("img", images);
+    setImages(img);
   };
 
   const [images, setImages] = useState([]);
