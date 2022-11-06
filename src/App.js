@@ -1,5 +1,6 @@
 import logo from "./assets/robot.png";
 import "./App.css";
+import { useEffect, useState } from "react";
 
 function App() {
   const gradient = [
@@ -23,6 +24,8 @@ function App() {
     console.log("Button clicked");
   };
 
+  const [buttonColor, setButtonColor] = useState(gradient[0]);
+
   return (
     <div
       style={{
@@ -38,11 +41,23 @@ function App() {
         alt="logo"
         style={{ width: "100px", borderRadius: "35px" }}
       />
-      <h1 style={{ margin: "10px 0", padding: 0 }}>Weird Web</h1>
-      <h3 style={{ margin: 0, padding: 0 }}>The game</h3>
+      <h1 style={{ margin: 0, padding: 0 }}>Weird Web</h1>
+      <h3 style={{ margin: "15px", padding: 0 }}>The game</h3>
 
-      <p>Find the AI-generated image out of the images displayed</p>
-      <div style={{ fontsize: "25px", margin: "50px 0" }} id="play-button">
+      <p style={{ margin: 0, padding: 0 }}>
+        Find the AI-generated image out of the images displayed
+      </p>
+      <div
+        style={{
+          fontSize: "50px",
+          margin: "50px 0",
+          padding: "25px",
+          background: buttonColor,
+          color: "white",
+          borderRadius: "10px",
+        }}
+        id="play-button"
+      >
         PLAY
       </div>
     </div>
