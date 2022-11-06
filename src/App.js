@@ -106,23 +106,22 @@ const App = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        margin: "100px 20px",
+        margin: "50px 20px",
       }}
     >
       <img
         src={logo}
         alt="logo"
-        style={{ width: "100px", borderRadius: "35px" }}
+        style={{ width: "100px", borderRadius: "35px", margin: "15px 0" }}
       />
 
       <h1 style={{ margin: 0, padding: 0 }}>Weird Web</h1>
       {showButton && <h3 style={{ margin: "15px", padding: 0 }}>The game</h3>}
 
-      {showButton && (
-        <p style={{ margin: 0, padding: 0 }}>
-          Find the AI-generated image out of the images displayed
-        </p>
-      )}
+      <p style={{ margin: "5px 0", padding: 0 }}>
+        Find the AI-generated image out of the images displayed
+      </p>
+
       {showButton && (
         <button
           style={{
@@ -148,7 +147,19 @@ const App = () => {
           PLAY
         </button>
       )}
-      {topic && <h4>{topic}</h4>}
+      {topic && (
+        <div
+          style={{
+            backgroundColor: "gray",
+            color: "white",
+            padding: "10px 20px",
+            borderRadius: "10px",
+            margin: "25px 0",
+          }}
+        >
+          {topic}
+        </div>
+      )}
       {!showButton && (
         <div
           style={{
