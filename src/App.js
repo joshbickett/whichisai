@@ -3,7 +3,7 @@ import loadingImg from "./assets/loading.png";
 import "./App.css";
 import { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import { getAIImage, getNormalImages } from "./api";
-import { getTopic } from "./topic";
+import { getTheme } from "./theme";
 
 const App = () => {
   const gradient = useMemo(
@@ -30,28 +30,39 @@ const App = () => {
 
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [topic, setTopic] = useState("");
+  const [theme, setTheme] = useState("");
 
   const startGame = async () => {
     setShowButton(false);
     setLoading(true);
-    const newTopic = getTopic();
+    const newTheme = getTheme();
 
-    let normalImgs = await getNormalImages(newTopic);
-    let aiImages = await getAIImage(newTopic);
+    let normalImgs = await getNormalImages(newTheme);
+    let aiImages = await getAIImage(newTheme);
 
     const imgs = createImgArray(normalImgs, aiImages);
 
     setTimeout(() => {
-      setTopic(newTopic);
+      setTheme(newTheme);
       setLoading(false);
       setImages(imgs);
     }, 2000);
   };
 
-  const createImgArray = (normalImgs, aiImages) => {
+  const createImgArray = (normalImages, aiImages) => {
     let randomIndex = Math.floor(Math.random() * aiImages.length);
     let randomAIImage = aiImages[randomIndex];
+
+    // add 10 of the random normal images into an array and don't allow duplicates
+    let normalImgs = [];
+    for (let i = 0; i < 5; i++) {
+      let randomIndex = Math.floor(Math.random() * normalImages.length);
+      let randomNormalImage = normalImages[randomIndex];
+
+      if (!normalImgs.includes(randomNormalImage)) {
+        normalImgs.push(randomNormalImage);
+      }
+    }
 
     let imgArr = normalImgs.map((img) => {
       return {
@@ -147,7 +158,7 @@ const App = () => {
           PLAY
         </button>
       )}
-      {topic && (
+      {theme && (
         <div
           style={{
             backgroundColor: "gray",
@@ -157,7 +168,7 @@ const App = () => {
             margin: "25px 0",
           }}
         >
-          {topic}
+          {theme}
         </div>
       )}
       {!showButton && (
