@@ -117,17 +117,17 @@ const App = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        margin: "50px 20px",
+        margin: "30px 10px",
       }}
     >
       <img
         src={logo}
         alt="logo"
-        style={{ width: "100px", borderRadius: "35px", margin: "15px 0" }}
+        style={{ width: "75px", borderRadius: "35px", margin: "20px 0" }}
       />
 
       <h1 style={{ margin: 0, padding: 0 }}>WhichAI</h1>
-      {showButton && <h3 style={{ margin: "15px", padding: 0 }}>The game</h3>}
+      <h3 style={{ margin: "15px", padding: 0 }}>The game</h3>
 
       <p style={{ margin: "5px 0", padding: 0 }}>
         Find the AI-generated image out of the images displayed
