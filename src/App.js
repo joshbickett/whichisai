@@ -44,6 +44,7 @@ const App = () => {
 
     setTimeout(() => {
       setTheme(newTheme);
+
       setLoading(false);
       setImages(imgs);
     }, 2000);
@@ -83,6 +84,7 @@ const App = () => {
   };
 
   const [showButton, setShowButton] = useState(true);
+  const [score, setScore] = useState(0);
   const showButtonRef = useRef(showButton);
   showButtonRef.current = showButton;
 
@@ -161,16 +163,39 @@ const App = () => {
       {theme && (
         <div
           style={{
-            backgroundColor: "gray",
-            color: "white",
-            padding: "10px 20px",
-            borderRadius: "10px",
-            margin: "25px 0",
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "row",
+            justifyContent: "space-around",
+            width: "100%",
           }}
         >
-          {theme}
+          <div
+            style={{
+              backgroundColor: "gray",
+              color: "white",
+              padding: "10px 20px",
+              borderRadius: "10px",
+              margin: "5px",
+            }}
+          >
+            Theme: {theme}
+          </div>
+
+          <div
+            style={{
+              backgroundColor: "black",
+              color: "white",
+              padding: "10px 20px",
+              borderRadius: "10px",
+              margin: "25px 0",
+            }}
+          >
+            Score: {score}
+          </div>
         </div>
       )}
+
       {!showButton && (
         <div
           style={{
