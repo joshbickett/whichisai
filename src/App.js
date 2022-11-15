@@ -112,6 +112,10 @@ const App = () => {
     updateButtonColor(0);
   }, [updateButtonColor]);
 
+  const scored = () => {};
+
+  const lose = () => {};
+
   return (
     <div
       style={{
@@ -225,11 +229,8 @@ const App = () => {
               onClick={() => {
                 console.log("clicked");
                 console.log("image", image);
-                if (image.isAI) {
-                  alert("You win!");
-                } else {
-                  alert("You lose!");
-                }
+                if (image.isAI) scored();
+                else lose();
               }}
             />
           ))}
