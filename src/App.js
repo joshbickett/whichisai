@@ -31,6 +31,7 @@ const App = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState("");
+  const [resultMessage, setResultMessage] = useState(null);
 
   const startGame = async () => {
     setShowButton(false);
@@ -113,60 +114,73 @@ const App = () => {
   }, [updateButtonColor]);
 
   const scored = () => {
-    alert("You scored!");
+    const scoreMessage = ["You got it!", "Correct!", "Nice!", "Good job!"];
+    // select a message at random
+    const randomIndex = Math.floor(Math.random() * scoreMessage.length);
+    const message = scoreMessage[randomIndex];
+    setResultMessage(message);
+    setScore(score + 1);
   };
 
   const lose = () => {
-    alert("You lose!");
+    const loseMessage = ["Wrong!", "Nope!", "Incorrect!"];
+    // select a message at random
+    const randomIndex = Math.floor(Math.random() * loseMessage.length);
+    let message = loseMessage[randomIndex];
+    message += "start over!!";
+    setResultMessage(message);
+    setScore(0);
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        margin: "30px 10px",
-      }}
-    >
-      <img
-        src={logo}
-        alt="logo"
-        style={{ width: "75px", borderRadius: "35px", margin: "20px 0" }}
-      />
-
-      <h1 style={{ margin: 0, padding: 0 }}>WhichAI</h1>
-      <h3 style={{ margin: "15px", padding: 0 }}>The game</h3>
-
-      <p style={{ margin: "5px 0", padding: 0 }}>
-        Find the AI-generated image out of the images displayed
-      </p>
-
+    <div>
       {showButton && (
-        <button
+        <div
           style={{
-            fontSize: "50px",
-            margin: "50px 0",
-            padding: "25px",
-            backgroundColor: gradient[0],
-            color: "white",
-            borderRadius: "10px",
-            cursor: "pointer",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "30px 10px",
           }}
-          onMouseEnter={() => {
-            const button = document.getElementById("play-button");
-            button.style.scale = "1.1";
-          }}
-          onMouseLeave={() => {
-            const button = document.getElementById("play-button");
-            button.style.scale = "1";
-          }}
-          id="play-button"
-          onClick={() => startGame()}
         >
-          PLAY
-        </button>
+          <img
+            src={logo}
+            alt="logo"
+            style={{ width: "75px", borderRadius: "35px", margin: "20px 0" }}
+          />
+
+          <h1 style={{ margin: 0, padding: 0 }}>WhichAI</h1>
+          <h3 style={{ margin: "15px", padding: 0 }}>The game</h3>
+
+          <p style={{ margin: "5px 0", padding: 0 }}>
+            Find the AI-generated image out of the images displayed
+          </p>
+
+          <button
+            style={{
+              fontSize: "50px",
+              margin: "50px 0",
+              padding: "25px",
+              backgroundColor: gradient[0],
+              color: "white",
+              borderRadius: "10px",
+              cursor: "pointer",
+            }}
+            onMouseEnter={() => {
+              const button = document.getElementById("play-button");
+              button.style.scale = "1.1";
+            }}
+            onMouseLeave={() => {
+              const button = document.getElementById("play-button");
+              button.style.scale = "1";
+            }}
+            id="play-button"
+            onClick={() => startGame()}
+          >
+            PLAY
+          </button>
+        </div>
       )}
       {theme && (
         <div
@@ -180,15 +194,29 @@ const App = () => {
         >
           <div
             style={{
-              backgroundColor: "gray",
-              color: "white",
-              padding: "10px 20px",
-              borderRadius: "10px",
-              margin: "5px",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
             }}
           >
-            Theme: {theme}
+            Theme
+            <div
+              style={{
+                backgroundColor: "gray",
+                color: "white",
+                padding: "10px 20px",
+                borderRadius: "10px",
+                margin: "5px",
+              }}
+            >
+              {theme}
+            </div>
           </div>
+          <img
+            src={logo}
+            alt="logo"
+            style={{ width: "75px", borderRadius: "35px", margin: "20px 0" }}
+          />
 
           <div
             style={{
@@ -204,7 +232,7 @@ const App = () => {
         </div>
       )}
 
-      {!showButton && (
+      {!showButton && !resultMessage && (
         <div
           style={{
             margin: "50px 100px",
@@ -233,6 +261,7 @@ const App = () => {
               onClick={() => {
                 console.log("clicked");
                 console.log("image", image);
+
                 if (image.isAI) scored();
                 else lose();
               }}
@@ -246,6 +275,46 @@ const App = () => {
               style={{ width: "100px", height: "100px", border: "50%" }}
             />
           )}
+        </div>
+      )}
+      {resultMessage && (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+            padding: "20px",
+            borderRadius: "10px",
+          }}
+        >
+          <h3>{resultMessage}</h3>
+          {images
+            .filter((image) => image.isAI)
+            .map((image, index) => (
+              <img
+                src={image.url}
+                key={index}
+                alt="winner"
+                style={{ width: "150px", margin: "10px" }}
+              />
+            ))}
+
+          <div
+            onClick={() => {
+              setResultMessage(null);
+            }}
+            // add a nice blue  background
+            style={{
+              borderRadius: "10px",
+              cursor: "pointer",
+              padding: "10px",
+              backgroundColor: "black",
+              color: "white",
+            }}
+          >
+            Next
+          </div>
         </div>
       )}
     </div>
