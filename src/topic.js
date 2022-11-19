@@ -18,14 +18,12 @@ const type = ["city", "tree"];
 const theme = ["illustration", "painting", "anime"];
 
 export const getTopic = () => {
-  // choose between 1 and 0 randomly.
-
   const ran = Math.round(Math.random());
   if (ran === 0) {
     const randomIndex = Math.floor(Math.random() * type.length);
-    return type[randomIndex];
+    return { detail: type[randomIndex], isPhoto: true };
   } else {
     const randomIndex = Math.floor(Math.random() * theme.length);
-    return theme[randomIndex];
+    return { detail: theme[randomIndex], isPhoto: false };
   }
 };

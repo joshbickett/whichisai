@@ -35,15 +35,15 @@ const App = () => {
   const startGame = async () => {
     setShowButton(false);
     setLoading(true);
-    const newTheme = getTopic();
+    const topic = getTopic();
 
-    let normalImgs = await getNormalImages(newTheme);
-    let aiImages = await getAIImage(newTheme);
+    let normalImgs = await getNormalImages(topic);
+    let aiImages = await getAIImage(topic);
 
     const imgs = createImgArray(normalImgs, aiImages);
 
     setTimeout(() => {
-      setTheme(newTheme);
+      setTheme(topic.detail);
 
       setLoading(false);
       setImages(imgs);
