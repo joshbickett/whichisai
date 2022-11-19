@@ -33,9 +33,10 @@ const App = () => {
   const [theme, setTheme] = useState("");
   const [resultMessage, setResultMessage] = useState(null);
 
-  const startGame = async () => {
+  const play = async () => {
     setShowButton(false);
     setLoading(true);
+    setImages([]);
     const topic = getTopic();
 
     let normalImgs = await getNormalImages(topic);
@@ -45,7 +46,6 @@ const App = () => {
 
     setTimeout(() => {
       setTheme(topic.detail);
-
       setLoading(false);
       setImages(imgs);
     }, 2000);
@@ -127,7 +127,7 @@ const App = () => {
     // select a message at random
     const randomIndex = Math.floor(Math.random() * loseMessage.length);
     let message = loseMessage[randomIndex];
-    message += "start over!!";
+    message += " start over!!";
     setResultMessage(message);
     setScore(0);
   };
@@ -176,7 +176,7 @@ const App = () => {
               button.style.scale = "1";
             }}
             id="play-button"
-            onClick={() => startGame()}
+            onClick={() => play()}
           >
             PLAY
           </button>
@@ -202,7 +202,7 @@ const App = () => {
             Theme
             <div
               style={{
-                backgroundColor: "gray",
+                backgroundColor: "#181D20",
                 color: "white",
                 padding: "10px 20px",
                 borderRadius: "10px",
@@ -220,7 +220,7 @@ const App = () => {
 
           <div
             style={{
-              backgroundColor: "black",
+              backgroundColor: "#76A5BE",
               color: "white",
               padding: "10px 20px",
               borderRadius: "10px",
@@ -303,6 +303,7 @@ const App = () => {
           <div
             onClick={() => {
               setResultMessage(null);
+              play();
             }}
             // add a nice blue  background
             style={{
