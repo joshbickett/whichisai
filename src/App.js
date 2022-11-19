@@ -244,13 +244,12 @@ const App = () => {
       {!showButton && !resultMessage && (
         <div
           style={{
-            margin: "50px 100px",
-
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             flexWrap: "wrap",
           }}
+          className="images-container"
         >
           {images.map((image, index) => (
             <img
