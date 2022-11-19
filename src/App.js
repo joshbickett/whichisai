@@ -220,14 +220,23 @@ const App = () => {
 
           <div
             style={{
-              backgroundColor: "#76A5BE",
-              color: "white",
-              padding: "10px 20px",
-              borderRadius: "10px",
-              margin: "25px 0",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
             }}
           >
-            Score: {score}
+            Score
+            <div
+              style={{
+                backgroundColor: "#76A5BE",
+                color: "white",
+                padding: "10px 20px",
+                borderRadius: "10px",
+                margin: "5px",
+              }}
+            >
+              {score}
+            </div>
           </div>
         </div>
       )}
