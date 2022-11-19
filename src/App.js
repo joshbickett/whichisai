@@ -3,7 +3,7 @@ import loadingImg from "./assets/loading.png";
 import "./App.css";
 import { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import { getAIImage, getNormalImages } from "./api";
-import { getTheme } from "./theme";
+import { getTopic } from "./topic";
 
 const App = () => {
   const gradient = useMemo(
@@ -35,7 +35,7 @@ const App = () => {
   const startGame = async () => {
     setShowButton(false);
     setLoading(true);
-    const newTheme = getTheme();
+    const newTheme = getTopic();
 
     let normalImgs = await getNormalImages(newTheme);
     let aiImages = await getAIImage(newTheme);
@@ -112,9 +112,13 @@ const App = () => {
     updateButtonColor(0);
   }, [updateButtonColor]);
 
-  const scored = () => {};
+  const scored = () => {
+    alert("You scored!");
+  };
 
-  const lose = () => {};
+  const lose = () => {
+    alert("You lose!");
+  };
 
   return (
     <div
