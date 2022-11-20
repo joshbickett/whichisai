@@ -25,7 +25,7 @@ const type = [
   "forest",
   "desert",
 ];
-const theme = ["illustration", "painting", "anime", "cartoon", "photo"];
+const theme = ["illustration", "painting", "photo"];
 
 export const getTopic = () => {
   // return { detail: "anime", isPhoto: false };
