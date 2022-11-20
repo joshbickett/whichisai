@@ -28,7 +28,7 @@ const type = [
 const theme = ["illustration", "painting", "photo"];
 
 export const getTopic = () => {
-  // return { detail: "anime", isPhoto: false };
+  // return { detail: "photo", isPhoto: false };
   const ran = Math.round(Math.random());
   if (ran === 0) {
     const randomIndex = Math.floor(Math.random() * type.length);

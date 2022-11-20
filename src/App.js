@@ -150,7 +150,7 @@ const App = () => {
             style={{ width: "75px", borderRadius: "35px", margin: "20px 0" }}
           />
 
-          <h1 style={{ margin: 0, padding: 0 }}>WhichAI</h1>
+          <h1 style={{ margin: 0, padding: 0 }}>WhichIsAI</h1>
           <h3 style={{ margin: "15px", padding: 0 }}>The game</h3>
 
           <p style={{ margin: "5px 0", padding: 0, textAlign: "center" }}>
