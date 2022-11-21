@@ -139,7 +139,7 @@ const App = () => {
   };
 
   return (
-    <div style={{ height: "1000px" }}>
+    <div>
       {showButton && (
         <div
           style={{
@@ -321,7 +321,7 @@ const App = () => {
                 }}
                 key={index}
               >
-                <p style={{ fontSize: "12px" }}>
+                <p style={{ fontSize: "10px" }}>
                   See on <a href={image.originalSrc}>AI image</a> on{" "}
                   <a href="https://lexica.art/">Lexica.art</a>
                 </p>
