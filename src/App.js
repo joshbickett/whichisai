@@ -133,7 +133,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div style={{ height: "1000px" }}>
       {showButton && (
         <div
           style={{
@@ -326,6 +326,32 @@ const App = () => {
           </div>
         </div>
       )}
+      <div
+        style={{
+          position: "fixed",
+          width: "100%",
+          bottom: 0,
+          backgroundColor: "black",
+          color: "white",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "10px 0",
+            fontSize: "8px",
+          }}
+        >
+          Side project by <a href="https://bickett.ai/">Josh Bickett</a>. Follow
+          on Twitter{" "}
+          <a href="https://twitter.com/josh_bickett"> @josh_bickett</a>.Real
+          images provided by Unsplash under the{" "}
+          <a href="https://unsplash.com/license"> Unsplash License.</a>. AI
+          images from <a href="https://lexica.art/">Lexica.art</a>
+        </div>
+      </div>
     </div>
   );
 };
