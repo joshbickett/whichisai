@@ -26,11 +26,13 @@ const type = [
   "water",
   "sky",
   "beach",
+  "sun",
+  "moon",
 ];
-const theme = ["illustration", "painting", "photo"];
+const theme = ["illustration", "painting", "photo", "drawing"];
 
 export const getTopic = () => {
-  // return { detail: "moutain", isPhoto: true };
+  // return { detail: "drawing", isPhoto: false };
   const ran = Math.round(Math.random());
   if (ran === 0) {
     const randomIndex = Math.floor(Math.random() * type.length);
