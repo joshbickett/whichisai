@@ -84,6 +84,8 @@ const App = () => {
     return imgArr;
   };
 
+  const [showFooter, setShowFooter] = useState(false);
+
   const [showButton, setShowButton] = useState(true);
   const [score, setScore] = useState(0);
   const showButtonRef = useRef(showButton);
@@ -331,33 +333,62 @@ const App = () => {
           </div>
         </div>
       )}
-      <div
-        style={{
-          position: "fixed",
-          width: "100%",
-          bottom: 0,
-          backgroundColor: "#D3D3D3",
-        }}
-      >
+
+      {!showFooter && (
         <div
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            margin: "10px 0",
+            position: "fixed",
+            width: "100%",
+            bottom: 0,
+            backgroundColor: "#ededed",
             fontSize: "12px",
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            setShowFooter(true);
           }}
         >
-          <p style={{ textAlign: "center" }}>
-            Side project by <a href="https://bickett.ai/">Josh Bickett</a>.
-            Follow on Twitter
-            <a href="https://twitter.com/josh_bickett"> @josh_bickett</a>. Real
-            images provided by Unsplash under the
-            <a href="https://unsplash.com/license"> Unsplash License</a>. AI
-            images from <a href="https://lexica.art/">Lexica.art</a>
-          </p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "10px",
+            }}
+          >
+            ^_^
+          </div>
         </div>
-      </div>
+      )}
+      {showFooter && (
+        <div
+          style={{
+            position: "fixed",
+            width: "100%",
+            bottom: 0,
+            backgroundColor: "#ededed",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              margin: "10px 0",
+              fontSize: "12px",
+            }}
+          >
+            <p style={{ textAlign: "center" }}>
+              Side project by <a href="https://bickett.ai/">Josh Bickett</a>.
+              Follow on Twitter
+              <a href="https://twitter.com/josh_bickett"> @josh_bickett</a>.
+              Real images provided by Unsplash under the
+              <a href="https://unsplash.com/license"> Unsplash License</a>. AI
+              images from <a href="https://lexica.art/">Lexica.art</a>
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
