@@ -4,7 +4,7 @@ export const getAIImage = async (search) => {
   return new Promise(async (resolve, reject) => {
     console.log("search", search);
     let searchTerm = search.isPhoto
-      ? "Image of " + search.detail
+      ? "Photo of " + search.detail
       : search.detail;
     console.log("searchTerm", searchTerm);
 
