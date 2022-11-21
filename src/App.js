@@ -280,7 +280,12 @@ const App = () => {
               src={loadingImg}
               alt="loading"
               className="App-loading"
-              style={{ width: "100px", height: "100px", border: "50%" }}
+              style={{
+                width: "100px",
+                height: "100px",
+                border: "50%",
+                margin: "50px",
+              }}
             />
           )}
         </div>
