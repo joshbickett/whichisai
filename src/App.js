@@ -331,8 +331,7 @@ const App = () => {
           position: "fixed",
           width: "100%",
           bottom: 0,
-          backgroundColor: "black",
-          color: "white",
+          backgroundColor: "#D3D3D3",
         }}
       >
         <div
@@ -341,15 +340,17 @@ const App = () => {
             justifyContent: "center",
             alignItems: "center",
             margin: "10px 0",
-            fontSize: "8px",
+            fontSize: "12px",
           }}
         >
-          Side project by <a href="https://bickett.ai/">Josh Bickett</a>. Follow
-          on Twitter{" "}
-          <a href="https://twitter.com/josh_bickett"> @josh_bickett</a>.Real
-          images provided by Unsplash under the{" "}
-          <a href="https://unsplash.com/license"> Unsplash License.</a>. AI
-          images from <a href="https://lexica.art/">Lexica.art</a>
+          <p style={{ textAlign: "center" }}>
+            Side project by <a href="https://bickett.ai/">Josh Bickett</a>.
+            Follow on Twitter
+            <a href="https://twitter.com/josh_bickett"> @josh_bickett</a>. Real
+            images provided by Unsplash under the
+            <a href="https://unsplash.com/license"> Unsplash License</a>. AI
+            images from <a href="https://lexica.art/">Lexica.art</a>
+          </p>
         </div>
       </div>
     </div>
