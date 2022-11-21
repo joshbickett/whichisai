@@ -32,13 +32,13 @@ const theme = ["illustration", "painting", "photo"];
 export const getTopic = () => {
   // return { detail: "moutain", isPhoto: true };
   const ran = Math.round(Math.random());
-  // if (ran === 0) {
-  const randomIndex = Math.floor(Math.random() * type.length);
+  if (ran === 0) {
+    const randomIndex = Math.floor(Math.random() * type.length);
 
-  return { detail: type[randomIndex], isPhoto: true };
-  // } else {
-  //   const randomIndex = Math.floor(Math.random() * theme.length);
+    return { detail: type[randomIndex], isPhoto: true };
+  } else {
+    const randomIndex = Math.floor(Math.random() * theme.length);
 
-  //   return { detail: theme[randomIndex], isPhoto: false };
-  // }
+    return { detail: theme[randomIndex], isPhoto: false };
+  }
 };
