@@ -74,10 +74,14 @@ const App = () => {
     });
 
     const imageSmall = randomAIImage.srcSmall;
+    const lexica = randomAIImage.gallary;
+    const imageLarge = randomAIImage.src;
 
     imgArr.push({
       url: imageSmall,
       isAI: true,
+      lexica: lexica,
+      originalSrc: imageLarge,
     });
     imgArr = imgArr.sort(() => Math.random() - 0.5);
 
@@ -304,15 +308,31 @@ const App = () => {
           }}
         >
           <h3>{resultMessage}</h3>
+
           {images
             .filter((image) => image.isAI)
             .map((image, index) => (
-              <img
-                src={image.url}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                }}
                 key={index}
-                alt="winner"
-                style={{ width: "150px", margin: "10px" }}
-              />
+              >
+                <p style={{ fontSize: "12px" }}>
+                  See on <a href={image.originalSrc}>AI image</a> on{" "}
+                  <a href="https://lexica.art/">Lexica.art</a>
+                </p>
+
+                <img
+                  src={image.url}
+                  key={index}
+                  alt="winner"
+                  style={{ width: "250px", margin: "10px" }}
+                />
+              </div>
             ))}
 
           <div
