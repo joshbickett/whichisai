@@ -138,6 +138,29 @@ const App = () => {
       setScoreScale("1.0");
     }, 500);
   };
+  const disappearingScoreScale = (i) => {
+    const scales = [
+      "1.0",
+      "0.9",
+      "0.8",
+      "0.7",
+      "0.6",
+      "0.5",
+      "0.4",
+      "0.3",
+      "0.2",
+      "0.1",
+      "0.0",
+      "1.0",
+    ];
+    const scale = scales[i];
+    setScoreScale(scale);
+    if (i < scales.length - 1) {
+      setTimeout(() => {
+        disappearingScoreScale(i + 1);
+      }, 50);
+    }
+  };
 
   const lose = () => {
     const loseMessage = ["Wrong!", "Nope!", "Incorrect!"];
@@ -147,12 +170,12 @@ const App = () => {
     message += " start over!!";
     setResultMessage(message);
     setScore(0);
+    disappearingScoreScale(0);
     setScoreBackgroundColor("red");
     setScoreScale("0.9");
     setTimeout(() => {
       setScoreBackgroundColor("#76A5BE");
-      setScoreScale("1.0");
-    }, 1000);
+    }, 600);
   };
 
   return (
@@ -386,7 +409,7 @@ const App = () => {
               color: "white",
             }}
           >
-            Next
+            {score > 0 ? "Next" : "Play again"}
           </div>
         </div>
       )}
