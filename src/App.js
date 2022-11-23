@@ -355,7 +355,7 @@ const App = () => {
                   setTimeout(() => {
                     if (image.isAI) scored();
                     else lose();
-                  }, 2000);
+                  }, 1500);
                 }}
               />
             ))}
