@@ -32,11 +32,13 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState("");
   const [resultMessage, setResultMessage] = useState(null);
+  const [opacity, setOpacity] = useState(0);
 
   const play = async () => {
     setShowButton(false);
     setLoading(true);
     setImages([]);
+    setOpacity(0);
     const topic = getTopic();
 
     let normalImgs = await getNormalImages(topic);
@@ -44,11 +46,14 @@ const App = () => {
 
     const imgs = createImgArray(normalImgs, aiImages);
 
+    setTheme(topic.detail);
+
+    setImages(imgs);
+
     setTimeout(() => {
-      setTheme(topic.detail);
       setLoading(false);
-      setImages(imgs);
-    }, 2000);
+      setOpacity(1);
+    }, 200);
   };
 
   const createImgArray = (normalImages, aiImages) => {
@@ -153,7 +158,11 @@ const App = () => {
           <img
             src={logo}
             alt="logo"
-            style={{ width: "75px", borderRadius: "35px", margin: "20px 0" }}
+            style={{
+              width: "75px",
+              borderRadius: "35px",
+              margin: "20px 0",
+            }}
           />
 
           <h1 style={{ margin: 0, padding: 0 }}>WhichIsAI</h1>
@@ -253,34 +262,10 @@ const App = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            flexWrap: "wrap",
+            flexDirection: "column",
           }}
           className="images-container"
         >
-          {images.map((image, index) => (
-            <img
-              src={image.url}
-              key={index}
-              alt="logo"
-              style={{ width: "150px", margin: "10px", cursor: "pointer" }}
-              onMouseEnter={() => {
-                const img = document.getElementById(`img-${index}`);
-                img.style.scale = "1.1";
-              }}
-              onMouseLeave={() => {
-                const img = document.getElementById(`img-${index}`);
-                img.style.scale = "1";
-              }}
-              id={`img-${index}`}
-              onClick={() => {
-                console.log("clicked");
-                console.log("image", image);
-
-                if (image.isAI) scored();
-                else lose();
-              }}
-            />
-          ))}
           {loading && (
             <img
               src={loadingImg}
@@ -294,6 +279,45 @@ const App = () => {
               }}
             />
           )}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              flexDirection: "row",
+            }}
+          >
+            {images.map((image, index) => (
+              <img
+                src={image.url}
+                key={index}
+                alt="logo"
+                style={{
+                  width: "150px",
+                  margin: "10px",
+                  cursor: "pointer",
+                  opacity: opacity,
+                }}
+                onMouseEnter={() => {
+                  const img = document.getElementById(`img-${index}`);
+                  img.style.scale = "1.1";
+                }}
+                onMouseLeave={() => {
+                  const img = document.getElementById(`img-${index}`);
+                  img.style.scale = "1";
+                }}
+                id={`img-${index}`}
+                onClick={() => {
+                  console.log("clicked");
+                  console.log("image", image);
+
+                  if (image.isAI) scored();
+                  else lose();
+                }}
+              />
+            ))}
+          </div>
         </div>
       )}
       {resultMessage && (
