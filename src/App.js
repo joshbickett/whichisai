@@ -36,6 +36,8 @@ const App = () => {
   const [aiImgOpacity, setAiImgOpacity] = useState(0);
   const [scoreBackgroundColor, setScoreBackgroundColor] = useState("#76A5BE");
   const [scoreScale, setScoreScale] = useState("1.0");
+  const [showAboutTheImages, setShowAboutTheImages] = useState(false);
+  const [showWhy, setShowWhy] = useState(false);
 
   const play = async () => {
     setShowButton(false);
@@ -180,6 +182,12 @@ const App = () => {
       setScoreBackgroundColor("#76A5BE");
     }, 600);
   };
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.setAttribute("src", "https://platform.twitter.com/widgets.js");
+    document.body.appendChild(script);
+  }, []);
 
   return (
     <div>
@@ -456,28 +464,99 @@ const App = () => {
           }}
           onClick={(e) => {
             if (e.target.nodeName === "A") return;
+            if (e.target.id === "why-game") return;
+            if (e.target.id === "about-the-images") return;
             setShowFooter(false);
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-              margin: "5px 0",
-              fontSize: "12px",
-            }}
-          >
-            <p style={{ textAlign: "center" }}>
-              Side project by <a href="https://bickett.ai/">Josh Bickett</a>.
-              Follow on Twitter
-              <a href="https://twitter.com/josh_bickett"> @josh_bickett</a>.
-              Real images provided by Unsplash under the
-              <a href="https://unsplash.com/license"> Unsplash License</a>. AI
-              images from <a href="https://lexica.art/">Lexica.art</a>
-            </p>
-            <div>V</div>
+          <div>
+            {true && (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexDirection: "column",
+                }}
+              >
+                {!showAboutTheImages && !showWhy && (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      flexDirection: "row",
+                      margin: "5px 0",
+                      fontSize: "12px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        backgroundColor: "#76A5BE",
+                        color: "white",
+                        padding: "10px",
+                        borderRadius: "10px",
+                        margin: "5px",
+                        cursor: "pointer",
+                        width: "100px",
+                        textAlign: "center",
+                      }}
+                      onClick={() => {
+                        setShowWhy(true);
+                      }}
+                      id="why-game"
+                    >
+                      why a game?
+                    </div>
+                    <div
+                      style={{
+                        backgroundColor: "black",
+                        color: "white",
+                        padding: "10px",
+                        borderRadius: "10px",
+                        margin: "5px",
+                        cursor: "pointer",
+                        width: "100px",
+                        textAlign: "center",
+                      }}
+                      onMouseDown={() => {
+                        setShowAboutTheImages(true);
+                      }}
+                      id="about-the-images"
+                    >
+                      About the images
+                    </div>
+                  </div>
+                )}
+                {showAboutTheImages && (
+                  <p style={{ textAlign: "center" }}>
+                    Real images provided by Unsplash under the
+                    <a href="https://unsplash.com/license"> Unsplash License</a>
+                    . AI images from{" "}
+                    <a href="https://lexica.art/">Lexica.art</a>
+                  </p>
+                )}
+                {showWhy && (
+                  <blockquote class="twitter-tweet">
+                    <p>
+                      Such an AI game can be more than it first appears...it
+                      offers benchmarks for AI-generated content. We may imagine
+                      a future where users will not be able to decipher AI
+                      generate content. While we head to that future, a game can
+                      track the yard post for text, image, video, and music{" "}
+                      <a href="https://t.co/HhudMWKeOH">
+                        https://t.co/HhudMWKeOH
+                      </a>
+                    </p>{" "}
+                    Josh Bickett (@josh_bickett){" "}
+                    <a href="https://twitter.com/josh_bickett/status/1595118550959943680?ref_src=twsrc%5Etfw">
+                      November 22, 2022
+                    </a>
+                  </blockquote>
+                )}
+
+                <div>⬇</div>
+              </div>
+            )}
           </div>
         </div>
       )}
