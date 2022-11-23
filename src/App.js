@@ -502,7 +502,7 @@ const App = () => {
                       }}
                       id="why-game"
                     >
-                      why a game?
+                      Why a game?
                     </div>
                     <div
                       style={{
