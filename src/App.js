@@ -33,6 +33,8 @@ const App = () => {
   const [theme, setTheme] = useState("");
   const [resultMessage, setResultMessage] = useState(null);
   const [opacity, setOpacity] = useState(0);
+  const [scoreBackgroundColor, setScoreBackgroundColor] = useState("#76A5BE");
+  const [scoreScale, setScoreScale] = useState("1.0");
 
   const play = async () => {
     setShowButton(false);
@@ -131,6 +133,10 @@ const App = () => {
     const message = scoreMessage[randomIndex];
     setResultMessage(message);
     setScore(score + 1);
+    setScoreScale("1.2");
+    setTimeout(() => {
+      setScoreScale("1.0");
+    }, 500);
   };
 
   const lose = () => {
@@ -141,6 +147,12 @@ const App = () => {
     message += " start over!!";
     setResultMessage(message);
     setScore(0);
+    setScoreBackgroundColor("red");
+    setScoreScale("0.9");
+    setTimeout(() => {
+      setScoreBackgroundColor("#76A5BE");
+      setScoreScale("1.0");
+    }, 1000);
   };
 
   return (
@@ -243,11 +255,12 @@ const App = () => {
             Score
             <div
               style={{
-                backgroundColor: "#76A5BE",
+                backgroundColor: scoreBackgroundColor,
                 color: "white",
                 padding: "10px 20px",
                 borderRadius: "10px",
                 margin: "5px",
+                scale: scoreScale,
               }}
             >
               {score}
