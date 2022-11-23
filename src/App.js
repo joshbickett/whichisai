@@ -559,7 +559,7 @@ const App = () => {
                       Such an AI game can be more than it first appears...it
                       offers benchmarks for AI-generated content. <br />
                       <br />
-                      We may imagine a future where users will not be able to
+                      We may imagine a future where people will not be able to
                       decipher AI generate content.
                       <br />
                       <br /> While we head to that future, games can track the
