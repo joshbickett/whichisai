@@ -32,7 +32,8 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState("");
   const [resultMessage, setResultMessage] = useState(null);
-  const [opacity, setOpacity] = useState(0);
+  const [realImgOpacity, setRealImgOpacity] = useState(0);
+  const [aiImgOpacity, setAiImgOpacity] = useState(0);
   const [scoreBackgroundColor, setScoreBackgroundColor] = useState("#76A5BE");
   const [scoreScale, setScoreScale] = useState("1.0");
 
@@ -40,7 +41,8 @@ const App = () => {
     setShowButton(false);
     setLoading(true);
     setImages([]);
-    setOpacity(0);
+    setRealImgOpacity(0);
+    setAiImgOpacity(0);
     const topic = getTopic();
 
     let normalImgs = await getNormalImages(topic);
@@ -54,7 +56,8 @@ const App = () => {
 
     setTimeout(() => {
       setLoading(false);
-      setOpacity(1);
+      setRealImgOpacity(1);
+      setAiImgOpacity(1);
     }, 200);
   };
 
@@ -333,7 +336,7 @@ const App = () => {
                   width: "150px",
                   margin: "10px",
                   cursor: "pointer",
-                  opacity: opacity,
+                  opacity: image.isAI ? aiImgOpacity : realImgOpacity,
                 }}
                 onMouseEnter={() => {
                   const img = document.getElementById(`img-${index}`);
@@ -347,9 +350,12 @@ const App = () => {
                 onClick={() => {
                   console.log("clicked");
                   console.log("image", image);
+                  setRealImgOpacity(0);
 
-                  if (image.isAI) scored();
-                  else lose();
+                  setTimeout(() => {
+                    if (image.isAI) scored();
+                    else lose();
+                  }, 2000);
                 }}
               />
             ))}
