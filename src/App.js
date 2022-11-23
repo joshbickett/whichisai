@@ -373,7 +373,7 @@ const App = () => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              padding: "10px",
+              padding: "5px",
             }}
           >
             ^_^
@@ -388,13 +388,18 @@ const App = () => {
             bottom: 0,
             backgroundColor: "#ededed",
           }}
+          onClick={(e) => {
+            if (e.target.nodeName === "A") return;
+            setShowFooter(false);
+          }}
         >
           <div
             style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              margin: "10px 0",
+              flexDirection: "column",
+              margin: "5px 0",
               fontSize: "12px",
             }}
           >
@@ -406,6 +411,7 @@ const App = () => {
               <a href="https://unsplash.com/license"> Unsplash License</a>. AI
               images from <a href="https://lexica.art/">Lexica.art</a>
             </p>
+            <div>V</div>
           </div>
         </div>
       )}
