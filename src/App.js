@@ -183,12 +183,6 @@ const App = () => {
     }, 600);
   };
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.setAttribute("src", "https://platform.twitter.com/widgets.js");
-    document.body.appendChild(script);
-  }, []);
-
   return (
     <div>
       {showButton && (
@@ -464,9 +458,12 @@ const App = () => {
           }}
           onClick={(e) => {
             if (e.target.nodeName === "A") return;
+            if (e.target.id === "follow") return;
             if (e.target.id === "why-game") return;
             if (e.target.id === "about-the-images") return;
             setShowFooter(false);
+            setShowWhy(false);
+            setShowAboutTheImages(false);
           }}
         >
           <div>
@@ -485,7 +482,7 @@ const App = () => {
                       justifyContent: "center",
                       alignItems: "center",
                       flexDirection: "row",
-                      margin: "5px 0",
+                      margin: "2px 0",
                       fontSize: "12px",
                     }}
                   >
@@ -525,6 +522,27 @@ const App = () => {
                     >
                       About the images
                     </div>
+                    <div
+                      style={{
+                        backgroundColor: "#76A5BE",
+                        color: "white",
+                        padding: "10px",
+                        borderRadius: "10px",
+                        margin: "5px",
+                        cursor: "pointer",
+                        width: "100px",
+                        textAlign: "center",
+                      }}
+                      onClick={() => {
+                        window.open(
+                          "https://twitter.com/josh_bickett/status/1594502446025277441?s=20&t=hdHNXW417Sw6VbAdw5_8Mg",
+                          "_blank"
+                        );
+                      }}
+                      id="follow"
+                    >
+                      Follow on Twitter
+                    </div>
                   </div>
                 )}
                 {showAboutTheImages && (
@@ -536,22 +554,18 @@ const App = () => {
                   </p>
                 )}
                 {showWhy && (
-                  <blockquote class="twitter-tweet">
-                    <p>
+                  <div>
+                    <p style={{ textAlign: "center" }}>
                       Such an AI game can be more than it first appears...it
-                      offers benchmarks for AI-generated content. We may imagine
-                      a future where users will not be able to decipher AI
-                      generate content. While we head to that future, a game can
-                      track the yard post for text, image, video, and music{" "}
-                      <a href="https://t.co/HhudMWKeOH">
-                        https://t.co/HhudMWKeOH
-                      </a>
-                    </p>{" "}
-                    Josh Bickett (@josh_bickett){" "}
-                    <a href="https://twitter.com/josh_bickett/status/1595118550959943680?ref_src=twsrc%5Etfw">
-                      November 22, 2022
-                    </a>
-                  </blockquote>
+                      offers benchmarks for AI-generated content. <br />
+                      <br />
+                      We may imagine a future where users will not be able to
+                      decipher AI generate content.
+                      <br />
+                      <br /> While we head to that future, games can track the
+                      yard post for text, image, video, and music{" "}
+                    </p>
+                  </div>
                 )}
 
                 <div>⬇</div>
