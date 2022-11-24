@@ -280,7 +280,6 @@ const App = () => {
               alignItems: "center",
             }}
           >
-            Score
             <div
               style={{
                 backgroundColor: scoreBackgroundColor,
@@ -293,6 +292,7 @@ const App = () => {
             >
               {score}
             </div>
+            Score
           </div>
         </div>
       )}
