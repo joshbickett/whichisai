@@ -138,7 +138,7 @@ const App = () => {
     const message = scoreMessage[randomIndex];
     setResultMessage(message);
     setScore(score + 1);
-    setScoreScale("1.2");
+    setScoreScale("1.1");
     setTimeout(() => {
       setScoreScale("1.0");
     }, 500);
