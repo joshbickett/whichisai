@@ -30,7 +30,11 @@
 }
 
 .images-container {
-  margin: 50px 100px;
+  margin: 50px 200px;
+}
+
+.game-image {
+  width: 250px;
 }
 
 @keyframes App-logo-spin {
@@ -46,5 +50,8 @@
 @media (max-width: 768px) {
   .images-container {
     margin: 50px 0px;
+  }
+  .game-image {
+    width: 150px;
   }
 }

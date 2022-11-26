@@ -334,8 +334,8 @@ const App = () => {
                 src={image.url}
                 key={index}
                 alt="logo"
+                className="game-image"
                 style={{
-                  width: "150px",
                   margin: "10px",
                   cursor: "pointer",
                   opacity: image.isAI ? aiImgOpacity : realImgOpacity,
