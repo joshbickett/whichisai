@@ -1,19 +1,3 @@
-// const themes = [
-//   "anime",
-//   "cartoon",
-//   "illustration",
-//   "vector",
-//   "photo",
-//   "drawing",
-//   "painting",
-//   "digital",
-//   "art",
-//   "graphic",
-//   "design",
-//   "line art",
-//   "sketch",
-// ];
-
 const type = [
   "tree",
   "mountain",
@@ -28,11 +12,15 @@ const type = [
   "beach",
   "sun",
   "moon",
+  "rain",
+  "snow",
+  "lightning",
+  "road",
 ];
 const theme = ["illustration", "painting", "photo", "drawing"];
 
 export const getTopic = () => {
-  // return { detail: "drawing", isPhoto: false };
+  // return { detail: "road", isPhoto: true };
   const ran = Math.round(Math.random());
   if (ran === 0) {
     const randomIndex = Math.floor(Math.random() * type.length);
