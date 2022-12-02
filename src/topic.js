@@ -16,11 +16,14 @@ const type = [
   "snow",
   "lightning",
   "road",
+  "window",
+  "door",
 ];
-const theme = ["illustration", "painting", "photo", "drawing"];
+const theme = ["illustration", "painting", "photo", "drawing", "design"];
 
 export const getTopic = () => {
-  // return { detail: "road", isPhoto: true };
+  // uncomment this line below to test a new topic
+  // return { detail: "door", isPhoto: true };
   const ran = Math.round(Math.random());
   if (ran === 0) {
     const randomIndex = Math.floor(Math.random() * type.length);
