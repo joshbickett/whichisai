@@ -52,7 +52,7 @@ const App = () => {
 
     const imgs = createImgArray(normalImgs, aiImages);
 
-    setTheme(topic.detail);
+    setTheme(topic.type);
 
     setImages(imgs);
 
