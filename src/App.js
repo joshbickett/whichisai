@@ -399,33 +399,6 @@ const App = () => {
               }}
             >
               <h3>{resultMessage}</h3>
-
-              {images
-                .filter((image) => image.isAI)
-                .map((image, index) => (
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexDirection: "column",
-                    }}
-                    key={index}
-                  >
-                    <p style={{ fontSize: "10px" }}>
-                      See <a href={image.originalSrc}>AI image</a> on{" "}
-                      <a href="https://lexica.art/">Lexica.art</a>
-                    </p>
-
-                    <img
-                      src={image.url}
-                      key={index}
-                      alt="winner"
-                      style={{ width: "250px", margin: "10px" }}
-                    />
-                  </div>
-                ))}
-
               <div
                 onClick={() => {
                   setResultMessage(null);
@@ -434,13 +407,59 @@ const App = () => {
                 // add a nice blue  background
                 style={{
                   borderRadius: "10px",
+                  width: "200px",
+                  textAlign: "center",
                   cursor: "pointer",
                   padding: "10px",
                   backgroundColor: "black",
                   color: "white",
+                  fontSize: "20px",
                 }}
               >
-                {score > 0 ? "Next" : "Play again"}
+                {score > 0 ? "NEXT" : "PLAY AGAIN"}
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexWrap: "wrap",
+                  flexDirection: "row",
+                }}
+              >
+                {images.map((image, index) => (
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                      border: image.isAI ? "3px solid black" : "none",
+                      padding: "10px",
+                      borderRadius: "10px",
+                    }}
+                    key={index}
+                  >
+                    <img
+                      src={image.url}
+                      key={index}
+                      alt="winner"
+                      style={{
+                        width: image.isAI ? "200px" : "50px",
+                        margin: "10px",
+                      }}
+                    />
+                    {image.isAI && (
+                      <p style={{ fontSize: "10px" }}>
+                        See <a href={image.originalSrc}>AI image</a> on{" "}
+                        <a href="https://lexica.art/">Lexica.art</a>
+                      </p>
+                    )}
+                    {!image.isAI && (
+                      <p style={{ fontSize: "10px" }}>Image is from Unspash!</p>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           )}
