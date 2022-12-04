@@ -103,6 +103,8 @@ const App = () => {
         url: img.urls.small,
         isAI: false,
         originalSrc: img.links.html,
+        unspashUser: img.user.name,
+        unspashUserSrc: img.user.links.html,
       };
     });
 
@@ -426,6 +428,7 @@ const App = () => {
                   justifyContent: "center",
                   flexWrap: "wrap",
                   flexDirection: "row",
+                  marginTop: "25px",
                 }}
               >
                 {images.map((image, index) => (
@@ -446,7 +449,7 @@ const App = () => {
                       key={index}
                       alt="winner"
                       style={{
-                        width: image.isAI ? "200px" : "50px",
+                        width: image.isAI ? "200px" : "100px",
                         margin: "10px",
                       }}
                     />
@@ -458,7 +461,9 @@ const App = () => {
                     )}
                     {!image.isAI && (
                       <p style={{ fontSize: "10px" }}>
-                        <a href={image.originalSrc}>See image</a> on Unspash!
+                        See <a href={image.originalSrc}>image</a>. By{" "}
+                        <a href={image.unspashUserSrc}>{image.unspashUser}</a>{" "}
+                        on <a href="https://unsplash.com/">Unspash</a>.
                       </p>
                     )}
                   </div>
