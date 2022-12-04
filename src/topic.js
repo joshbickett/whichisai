@@ -22,12 +22,15 @@ const topics = [
   { type: "painting", isPhoto: false },
   { type: "photo", isPhoto: false },
   { type: "drawing", isPhoto: false },
+  { type: "orange fruit", isPhoto: true },
+  { type: "apple fruit", isPhoto: true },
+  { type: "banana fruit", isPhoto: true },
+  { type: "notebook", isPhoto: true },
 ];
 
 export const getTopic = () => {
   // uncomment this line below to test a new topic
-  // return { detail: "door", isPhoto: true };
-  // select a random topic
+  // return { type: "cup", isPhoto: true };
   const randomTopic = topics[Math.floor(Math.random() * topics.length)];
   console.log("randomTopic", randomTopic);
 
