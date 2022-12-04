@@ -419,7 +419,7 @@ const App = () => {
                   fontSize: "20px",
                 }}
               >
-                {score > 0 ? "NEXT" : "PLAY AGAIN"}
+                {score > 0 ? "NEXT IMAGE" : "PLAY AGAIN"}
               </div>
               <div
                 style={{
