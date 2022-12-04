@@ -102,6 +102,7 @@ const App = () => {
       return {
         url: img.urls.small,
         isAI: false,
+        originalSrc: img.links.html,
       };
     });
 
@@ -456,7 +457,9 @@ const App = () => {
                       </p>
                     )}
                     {!image.isAI && (
-                      <p style={{ fontSize: "10px" }}>Image is from Unspash!</p>
+                      <p style={{ fontSize: "10px" }}>
+                        <a href={image.originalSrc}>See image</a> on Unspash!
+                      </p>
                     )}
                   </div>
                 ))}
