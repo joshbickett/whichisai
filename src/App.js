@@ -47,7 +47,8 @@ const App = () => {
     setAiImgOpacity(0);
     const topic = getTopic();
 
-    let normalImgs = await getNormalImages(topic);
+    const normalImgs = tryForRealImages(topic, 3);
+
     let aiImages = await getAIImage(topic);
 
     const imgs = createImgArray(normalImgs, aiImages);
@@ -61,6 +62,17 @@ const App = () => {
       setRealImgOpacity(1);
       setAiImgOpacity(1);
     }, 200);
+  };
+
+  const tryForRealImages = async (topic, tries) => {
+    let response = await getNormalImages(topic);
+    if (response.success === false && tries < 5) {
+      setTimeout(() => {
+        tryForRealImages(topic, tries);
+      }, 2000);
+    } else {
+      return response;
+    }
   };
 
   const createImgArray = (normalImages, aiImages) => {
@@ -128,7 +140,7 @@ const App = () => {
   );
 
   useEffect(() => {
-    updateButtonColor(0);
+    // updateButtonColor(0);
   }, [updateButtonColor]);
 
   const scored = () => {
@@ -207,12 +219,16 @@ const App = () => {
 
           <h1 style={{ margin: 0, padding: 0 }}>Which Is AI</h1>
           <h3 style={{ margin: "15px", padding: 0 }}>The game</h3>
-
           <p style={{ margin: "5px 0", padding: 0, textAlign: "center" }}>
-            Find the AI-generated image out of the images displayed
+            We are currently experiencing technical issues. We are working on
+            fixing it now!
           </p>
 
-          <button
+          {/* <p style={{ margin: "5px 0", padding: 0, textAlign: "center" }}>
+            Find the AI-generated image out of the images displayed
+          </p> */}
+
+          {/* <button
             style={{
               fontSize: "50px",
               margin: "50px 0",
@@ -234,7 +250,7 @@ const App = () => {
             onClick={() => play()}
           >
             PLAY
-          </button>
+          </button> */}
         </div>
       )}
       {theme && (

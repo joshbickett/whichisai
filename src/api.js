@@ -30,6 +30,8 @@ export const getNormalImages = async (search) => {
   // const url = `https://api.unsplash.com/search/photos?query=${search}&client_id=${key}`;
   return new Promise(async (resolve, reject) => {
     const response = await fetch(url);
+    console.log("response", response);
+    if (response === "Rate Limit Exceeded") resolve({ success: false });
     const data = await response.json();
 
     const images = data.results;
