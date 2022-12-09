@@ -29,8 +29,14 @@
   color: #61dafb;
 }
 
+.game-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+}
+
 .images-container {
-  margin: 50px;
+  margin: 10px 50px;
 }
 
 .game-image {
@@ -63,7 +69,7 @@
 /* mobile */
 @media (max-width: 768px) {
   .images-container {
-    margin: 50px 0px;
+    margin: 10px 0px;
   }
   .game-image {
     width: 150px;

@@ -46,6 +46,7 @@ const App = () => {
     setImages([]);
     setRealImgOpacity(0);
     setAiImgOpacity(0);
+    setScoreBackgroundColor("#76A5BE");
     const topic = getTopic();
 
     let normalImgs = await tryForRealImages(topic, 3);
@@ -203,9 +204,9 @@ const App = () => {
     disappearingScoreScale(0);
     setScoreBackgroundColor("#FF5733");
     setScoreScale("0.9");
-    setTimeout(() => {
-      setScoreBackgroundColor("#76A5BE");
-    }, 600);
+    // setTimeout(() => {
+    //   setScoreBackgroundColor("#76A5BE");
+    // }, 600);
   };
 
   return (
@@ -262,20 +263,13 @@ const App = () => {
             </div>
           )}
           {theme && (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                flexDirection: "row",
-                justifyContent: "space-around",
-                width: "100%",
-              }}
-            >
+            <div class="game-bar">
               <div
                 style={{
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
                 Theme
@@ -291,43 +285,23 @@ const App = () => {
                   {theme}
                 </div>
               </div>
-
               <div
                 style={{
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
-                {/* <h3>{resultMessage}</h3> */}
-                <div
-                  onClick={() => {
-                    setResultMessage(null);
-                    play();
-                  }}
-                  onMouseOver={() => {
-                    const button = document.getElementById("next-button");
-                    button.style.scale = "1.1";
-                  }}
-                  onMouseLeave={() => {
-                    const button = document.getElementById("next-button");
-                    button.style.scale = "1";
-                  }}
-                  // add a nice blue  background
+                <img
+                  src={logo}
+                  alt="logo"
                   style={{
-                    borderRadius: "10px",
-                    textAlign: "center",
-                    cursor: "pointer",
-                    padding: "10px 20px",
-                    margin: "5px",
-                    backgroundColor: score > 0 ? "black" : "#76A5BE",
-                    color: "white",
-                    opacity: resultMessage ? "1" : "0",
+                    width: "60px",
+                    borderRadius: "35px",
+                    margin: "5px 0",
                   }}
-                  id="next-button"
-                >
-                  {score > 0 ? "NEXT IMAGE" : "PLAY AGAIN"}
-                </div>
+                />
               </div>
 
               <div
@@ -335,6 +309,7 @@ const App = () => {
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
                 <div
@@ -378,6 +353,44 @@ const App = () => {
                 />
               )}
               <div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <h3 style={{ margin: "2px" }}>{resultMessage}</h3>
+                  <div
+                    onClick={() => {
+                      setResultMessage(null);
+                      play();
+                    }}
+                    onMouseOver={() => {
+                      const button = document.getElementById("next-button");
+                      button.style.scale = "1.1";
+                    }}
+                    onMouseLeave={() => {
+                      const button = document.getElementById("next-button");
+                      button.style.scale = "1";
+                    }}
+                    // add a nice blue  background
+                    style={{
+                      borderRadius: "10px",
+                      textAlign: "center",
+                      cursor: "pointer",
+                      padding: "10px 20px",
+                      margin: "5px",
+                      backgroundColor: score > 0 ? "#325668" : "#FF5733",
+                      color: "white",
+                      opacity: resultMessage ? "1" : "0",
+                    }}
+                    id="next-button"
+                  >
+                    {score > 0 ? "NEXT IMAGE" : "PLAY AGAIN"}
+                  </div>
+                </div>
                 {resultMessage ? (
                   <div
                     style={{
