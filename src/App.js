@@ -409,6 +409,14 @@ const App = () => {
                   setResultMessage(null);
                   play();
                 }}
+                onMouseOver={() => {
+                  const button = document.getElementById("next-button");
+                  button.style.scale = "1.1";
+                }}
+                onMouseLeave={() => {
+                  const button = document.getElementById("next-button");
+                  button.style.scale = "1";
+                }}
                 // add a nice blue  background
                 style={{
                   borderRadius: "10px",
@@ -420,6 +428,7 @@ const App = () => {
                   color: "white",
                   fontSize: "20px",
                 }}
+                id="next-button"
               >
                 {score > 0 ? "NEXT IMAGE" : "PLAY AGAIN"}
               </div>
