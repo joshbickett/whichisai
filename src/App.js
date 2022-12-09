@@ -38,7 +38,7 @@ const App = () => {
   const [scoreScale, setScoreScale] = useState("1.0");
   const [showAboutTheImages, setShowAboutTheImages] = useState(false);
   const [showWhy, setShowWhy] = useState(false);
-  const [error, setError] = useState(true);
+  const [error, setError] = useState(false);
 
   const play = async () => {
     setShowButton(false);
