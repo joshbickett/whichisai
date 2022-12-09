@@ -37,6 +37,16 @@
   width: 250px;
 }
 
+.result-image {
+  width: 250px;
+}
+
+.image-info {
+  font-size: 20px;
+  line-height: 1.5;
+  font-weight: bold;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -53,5 +63,14 @@
   }
   .game-image {
     width: 150px;
+  }
+  .result-image {
+    width: 150px;
+  }
+
+  .image-info {
+    font-size: 12px;
+    line-height: 1.5;
+    font-weight: bold;
   }
 }

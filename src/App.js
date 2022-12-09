@@ -396,18 +396,19 @@ const App = () => {
                           key={index}
                           alt="winner"
                           style={{
-                            width: "250px",
                             margin: "10px",
                             position: "relative",
                             zIndex: 1,
-                            opacity: 0.5,
+                            opacity: 0.4,
                             padding: image.isAI ? "5px" : "0",
                             border: image.isAI ? "5px solid black" : "none",
                           }}
+                          class="result-image"
                           id={`img-${index}`}
                         />
+
                         {image.isAI && (
-                          <p
+                          <div
                             style={{
                               position: "absolute",
                               zIndex: 2,
@@ -417,16 +418,27 @@ const App = () => {
                               left: document
                                 .getElementById(`img-${index}`)
                                 .getClientRects()[0].left,
-                              // transform: "translate(-50%, -50%)",
-                              fontSize: "10px",
+                              width: document
+                                .getElementById(`img-${index}`)
+                                .getClientRects()[0].width,
+                              height: document
+                                .getElementById(`img-${index}`)
+                                .getClientRects()[0].height,
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              flexDirection: "column",
                             }}
+                            class="image-info"
                           >
-                            See <a href={image.originalSrc}>AI image</a> on{" "}
-                            <a href="https://lexica.art/">Lexica.art</a>
-                          </p>
+                            <p style={{ textAlign: "center" }}>
+                              See <a href={image.originalSrc}>AI image</a> on{" "}
+                              <a href="https://lexica.art/">Lexica.art</a>
+                            </p>
+                          </div>
                         )}
                         {!image.isAI && (
-                          <p
+                          <div
                             style={{
                               position: "absolute",
                               zIndex: 2,
@@ -436,20 +448,34 @@ const App = () => {
                               left: document
                                 .getElementById(`img-${index}`)
                                 .getClientRects()[0].left,
-                              // transform: "translate(-50%, -50%)",
-                              fontSize: "10px",
+                              width: document
+                                .getElementById(`img-${index}`)
+                                .getClientRects()[0].width,
+                              height: document
+                                .getElementById(`img-${index}`)
+                                .getClientRects()[0].height,
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              flexDirection: "column",
                             }}
+                            class="image-info"
                           >
-                            See <a href={image.originalSrc}>image</a>. By{" "}
-                            <a href={image.unspashUserSrc + unspashUTM}>
-                              {image.unspashUser}
-                            </a>{" "}
-                            on{" "}
-                            <a href={"https://unsplash.com/" + unspashUTM}>
-                              Unspash
-                            </a>
-                            .
-                          </p>
+                            <p style={{ textAlign: "center" }}>
+                              See <a href={image.originalSrc}>image</a>
+                            </p>
+                            <p style={{ textAlign: "center" }}>
+                              By{" "}
+                              <a href={image.unspashUserSrc + unspashUTM}>
+                                {image.unspashUser}
+                              </a>{" "}
+                              on{" "}
+                              <a href={"https://unsplash.com/" + unspashUTM}>
+                                Unspash
+                              </a>
+                              .
+                            </p>
+                          </div>
                         )}
                       </div>
                     ))}
