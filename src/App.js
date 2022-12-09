@@ -201,7 +201,7 @@ const App = () => {
     setResultMessage(message);
     setScore(0);
     disappearingScoreScale(0);
-    setScoreBackgroundColor("red");
+    setScoreBackgroundColor("#FF5733");
     setScoreScale("0.9");
     setTimeout(() => {
       setScoreBackgroundColor("#76A5BE");
@@ -291,15 +291,45 @@ const App = () => {
                   {theme}
                 </div>
               </div>
-              <img
-                src={logo}
-                alt="logo"
+
+              <div
                 style={{
-                  width: "75px",
-                  borderRadius: "35px",
-                  margin: "20px 0",
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
                 }}
-              />
+              >
+                {/* <h3>{resultMessage}</h3> */}
+                <div
+                  onClick={() => {
+                    setResultMessage(null);
+                    play();
+                  }}
+                  onMouseOver={() => {
+                    const button = document.getElementById("next-button");
+                    button.style.scale = "1.1";
+                  }}
+                  onMouseLeave={() => {
+                    const button = document.getElementById("next-button");
+                    button.style.scale = "1";
+                  }}
+                  // add a nice blue  background
+                  style={{
+                    borderRadius: "10px",
+                    width: "200px",
+                    textAlign: "center",
+                    cursor: "pointer",
+                    padding: "10px 20px",
+                    margin: "5px",
+                    backgroundColor: score > 0 ? "black" : "#FF5733",
+                    color: "white",
+                    opacity: resultMessage ? "1" : "0",
+                  }}
+                  id="next-button"
+                >
+                  {score > 0 ? "NEXT IMAGE" : "PLAY AGAIN"}
+                </div>
+              </div>
 
               <div
                 style={{
@@ -325,7 +355,7 @@ const App = () => {
             </div>
           )}
 
-          {!showButton && !resultMessage && (
+          {!showButton && (
             <div
               style={{
                 display: "flex",
@@ -348,144 +378,126 @@ const App = () => {
                   }}
                 />
               )}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexWrap: "wrap",
-                  flexDirection: "row",
-                }}
-              >
-                {images.map((image, index) => (
-                  <img
-                    src={image.url}
-                    key={index}
-                    alt="a game asset"
-                    className="game-image"
-                    style={{
-                      margin: "10px",
-                      cursor: "pointer",
-                      opacity: image.isAI ? aiImgOpacity : realImgOpacity,
-                    }}
-                    onMouseEnter={() => {
-                      const img = document.getElementById(`img-${index}`);
-                      img.style.scale = "1.1";
-                    }}
-                    onMouseLeave={() => {
-                      const img = document.getElementById(`img-${index}`);
-                      img.style.scale = "1";
-                    }}
-                    id={`img-${index}`}
-                    onClick={() => {
-                      console.log("clicked");
-                      console.log("image", image);
-                      setRealImgOpacity(0);
-
-                      setTimeout(() => {
-                        if (image.isAI) scored();
-                        else lose();
-                      }, 1000);
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
-          {resultMessage && (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "column",
-                padding: "20px",
-                borderRadius: "10px",
-              }}
-            >
-              <h3>{resultMessage}</h3>
-              <div
-                onClick={() => {
-                  setResultMessage(null);
-                  play();
-                }}
-                onMouseOver={() => {
-                  const button = document.getElementById("next-button");
-                  button.style.scale = "1.1";
-                }}
-                onMouseLeave={() => {
-                  const button = document.getElementById("next-button");
-                  button.style.scale = "1";
-                }}
-                // add a nice blue  background
-                style={{
-                  borderRadius: "10px",
-                  width: "200px",
-                  textAlign: "center",
-                  cursor: "pointer",
-                  padding: "10px",
-                  backgroundColor: "black",
-                  color: "white",
-                  fontSize: "20px",
-                }}
-                id="next-button"
-              >
-                {score > 0 ? "NEXT IMAGE" : "PLAY AGAIN"}
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexWrap: "wrap",
-                  flexDirection: "row",
-                  marginTop: "25px",
-                }}
-              >
-                {images.map((image, index) => (
+              <div>
+                {resultMessage ? (
                   <div
                     style={{
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      flexDirection: "column",
-                      border: image.isAI ? "3px solid black" : "none",
-                      padding: "10px",
-                      borderRadius: "10px",
-                      width: "250px",
+                      flexWrap: "wrap",
+                      flexDirection: "row",
                     }}
-                    key={index}
                   >
-                    <img
-                      src={image.url}
-                      key={index}
-                      alt="winner"
-                      style={{
-                        width: image.isAI ? "150px" : "75px",
-                        margin: "10px",
-                      }}
-                    />
-                    {image.isAI && (
-                      <p style={{ fontSize: "10px" }}>
-                        See <a href={image.originalSrc}>AI image</a> on{" "}
-                        <a href="https://lexica.art/">Lexica.art</a>
-                      </p>
-                    )}
-                    {!image.isAI && (
-                      <p style={{ fontSize: "10px" }}>
-                        See <a href={image.originalSrc}>image</a>. By{" "}
-                        <a href={image.unspashUserSrc + unspashUTM}>
-                          {image.unspashUser}
-                        </a>{" "}
-                        on{" "}
-                        <a href={"https://unsplash.com/" + unspashUTM}>
-                          Unspash
-                        </a>
-                        .
-                      </p>
-                    )}
+                    {images.map((image, index) => (
+                      <div key={index}>
+                        <img
+                          src={image.url}
+                          key={index}
+                          alt="winner"
+                          style={{
+                            width: "250px",
+                            margin: "10px",
+                            position: "relative",
+                            zIndex: 1,
+                            opacity: 0.5,
+                            padding: image.isAI ? "5px" : "0",
+                            border: image.isAI ? "5px solid black" : "none",
+                          }}
+                          id={`img-${index}`}
+                        />
+                        {image.isAI && (
+                          <p
+                            style={{
+                              position: "absolute",
+                              zIndex: 2,
+                              top: document
+                                .getElementById(`img-${index}`)
+                                .getClientRects()[0].top,
+                              left: document
+                                .getElementById(`img-${index}`)
+                                .getClientRects()[0].left,
+                              // transform: "translate(-50%, -50%)",
+                              fontSize: "10px",
+                            }}
+                          >
+                            See <a href={image.originalSrc}>AI image</a> on{" "}
+                            <a href="https://lexica.art/">Lexica.art</a>
+                          </p>
+                        )}
+                        {!image.isAI && (
+                          <p
+                            style={{
+                              position: "absolute",
+                              zIndex: 2,
+                              top: document
+                                .getElementById(`img-${index}`)
+                                .getClientRects()[0].top,
+                              left: document
+                                .getElementById(`img-${index}`)
+                                .getClientRects()[0].left,
+                              // transform: "translate(-50%, -50%)",
+                              fontSize: "10px",
+                            }}
+                          >
+                            See <a href={image.originalSrc}>image</a>. By{" "}
+                            <a href={image.unspashUserSrc + unspashUTM}>
+                              {image.unspashUser}
+                            </a>{" "}
+                            on{" "}
+                            <a href={"https://unsplash.com/" + unspashUTM}>
+                              Unspash
+                            </a>
+                            .
+                          </p>
+                        )}
+                      </div>
+                    ))}
                   </div>
-                ))}
+                ) : (
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexWrap: "wrap",
+                      flexDirection: "row",
+                    }}
+                  >
+                    {images.map((image, index) => (
+                      <img
+                        src={image.url}
+                        key={index}
+                        alt="a game asset"
+                        className="game-image"
+                        style={{
+                          margin: "10px",
+                          cursor: "pointer",
+                          opacity: image.isAI ? aiImgOpacity : realImgOpacity,
+                        }}
+                        onMouseEnter={() => {
+                          const img = document.getElementById(`img-${index}`);
+                          img.style.scale = "1.1";
+                        }}
+                        onMouseLeave={() => {
+                          const img = document.getElementById(`img-${index}`);
+                          img.style.scale = "1";
+                        }}
+                        id={`img-${index}`}
+                        onClick={() => {
+                          console.log("clicked");
+                          console.log("image", image);
+                          setRealImgOpacity(0);
+
+                          setTimeout(() => {
+                            if (image.isAI) scored();
+                            else lose();
+                          }, 1000);
+                        }}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           )}
