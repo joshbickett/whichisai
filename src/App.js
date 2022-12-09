@@ -320,7 +320,7 @@ const App = () => {
                     cursor: "pointer",
                     padding: "10px 20px",
                     margin: "5px",
-                    backgroundColor: score > 0 ? "black" : "#FF5733",
+                    backgroundColor: score > 0 ? "black" : "#76A5BE",
                     color: "white",
                     opacity: resultMessage ? "1" : "0",
                   }}
@@ -457,8 +457,22 @@ const App = () => {
                               alignItems: "center",
                               justifyContent: "center",
                               flexDirection: "column",
+                              opacity: 0.0,
                             }}
                             class="image-info"
+                            id={`image-info-${index}`}
+                            onMouseEnter={() => {
+                              const info = document.getElementById(
+                                `image-info-${index}`
+                              );
+                              info.style.opacity = "1";
+                            }}
+                            onMouseLeave={() => {
+                              const info = document.getElementById(
+                                `image-info-${index}`
+                              );
+                              info.style.opacity = "0";
+                            }}
                           >
                             <p style={{ textAlign: "center" }}>
                               See <a href={image.originalSrc}>image</a>
