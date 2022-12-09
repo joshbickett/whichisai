@@ -14,7 +14,10 @@ export const getAIImage = async (search) => {
 
     const images = data.images;
     // filter nsfw images
-    const filteredImages = images.filter((img) => !img.nsfw);
+    const filteredImages = images
+      .filter((img) => !img.nsfw)
+      .filter((img) => !img.grid);
+
     if (DEBUG) console.log("[api] ai images", filteredImages);
 
     resolve(filteredImages);
