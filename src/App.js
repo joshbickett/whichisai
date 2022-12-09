@@ -83,6 +83,8 @@ const App = () => {
     }
   };
 
+  const unspashUTM = "?utm_source=Which_Is_AI&utm_medium=referral";
+
   const createImgArray = (normalImages, aiImages) => {
     let randomIndex = Math.floor(Math.random() * aiImages.length);
     let randomAIImage = aiImages[randomIndex];
@@ -462,8 +464,14 @@ const App = () => {
                     {!image.isAI && (
                       <p style={{ fontSize: "10px" }}>
                         See <a href={image.originalSrc}>image</a>. By{" "}
-                        <a href={image.unspashUserSrc}>{image.unspashUser}</a>{" "}
-                        on <a href="https://unsplash.com/">Unspash</a>.
+                        <a href={image.unspashUserSrc + unspashUTM}>
+                          {image.unspashUser}
+                        </a>{" "}
+                        on{" "}
+                        <a href={"https://unsplash.com/" + unspashUTM}>
+                          Unspash
+                        </a>
+                        .
                       </p>
                     )}
                   </div>
