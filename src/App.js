@@ -361,7 +361,7 @@ const App = () => {
                   <img
                     src={image.url}
                     key={index}
-                    alt="logo"
+                    alt="a game asset"
                     className="game-image"
                     style={{
                       margin: "10px",
@@ -452,6 +452,7 @@ const App = () => {
                       border: image.isAI ? "3px solid black" : "none",
                       padding: "10px",
                       borderRadius: "10px",
+                      width: "250px",
                     }}
                     key={index}
                   >
@@ -460,7 +461,7 @@ const App = () => {
                       key={index}
                       alt="winner"
                       style={{
-                        width: image.isAI ? "200px" : "100px",
+                        width: image.isAI ? "150px" : "75px",
                         margin: "10px",
                       }}
                     />
