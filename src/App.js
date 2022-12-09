@@ -52,7 +52,7 @@ const App = () => {
     let normalImgs = await tryForRealImages(topic, 3);
     console.log("got them back", normalImgs);
 
-    let aiImages = await getAIImage(topic);
+    let aiImages = await tryForAIImages(topic);
 
     const imgs = createImgArray(normalImgs, aiImages);
 
@@ -76,6 +76,23 @@ const App = () => {
       if (tries > 0) {
         setTimeout(() => {
           tryForRealImages(topic, tries - 1);
+        }, 2000);
+      } else {
+        setError(true);
+        return [];
+      }
+    }
+  };
+
+  const tryForAIImages = async (topic, tries) => {
+    let response = await getAIImage(topic);
+    console.log("[APP] response: ", response);
+    if (response.status === "success") {
+      return response.images;
+    } else {
+      if (tries > 0) {
+        setTimeout(() => {
+          tryForAIImages(topic, tries - 1);
         }, 2000);
       } else {
         setError(true);
@@ -204,9 +221,6 @@ const App = () => {
     disappearingScoreScale(0);
     setScoreBackgroundColor("#FF5733");
     setScoreScale("0.9");
-    // setTimeout(() => {
-    //   setScoreBackgroundColor("#76A5BE");
-    // }, 600);
   };
 
   return (

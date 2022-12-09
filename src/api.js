@@ -8,19 +8,23 @@ export const getAIImage = async (search) => {
     if (DEBUG) console.log("[api] searchTerm", searchTerm);
 
     const url = `https://lexica.art/api/v1/search?q=${searchTerm}`;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
 
-    const response = await fetch(url);
-    const data = await response.json();
+      const images = data.images;
+      // filter nsfw images
+      const filteredImages = images
+        .filter((img) => !img.nsfw)
+        .filter((img) => !img.grid);
 
-    const images = data.images;
-    // filter nsfw images
-    const filteredImages = images
-      .filter((img) => !img.nsfw)
-      .filter((img) => !img.grid);
+      if (DEBUG) console.log("[api] ai images", filteredImages);
 
-    if (DEBUG) console.log("[api] ai images", filteredImages);
-
-    resolve(filteredImages);
+      resolve({ status: "success", images: filteredImages });
+    } catch (error) {
+      console.log("[api] error", error);
+      resolve({ status: "error", images: [] });
+    }
   });
 };
 
