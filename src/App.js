@@ -316,7 +316,6 @@ const App = () => {
                   // add a nice blue  background
                   style={{
                     borderRadius: "10px",
-                    width: "200px",
                     textAlign: "center",
                     cursor: "pointer",
                     padding: "10px 20px",

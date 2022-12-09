@@ -47,6 +47,10 @@
   font-weight: bold;
 }
 
+#next-button {
+  width: 200px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -72,5 +76,8 @@
     font-size: 12px;
     line-height: 1.5;
     font-weight: bold;
+  }
+  #next-button {
+    width: 50px;
   }
 }
