@@ -36,7 +36,7 @@ const App = () => {
   const [aiImgOpacity, setAiImgOpacity] = useState(0);
   const [scoreBackgroundColor, setScoreBackgroundColor] = useState("#76A5BE");
   const [scoreScale, setScoreScale] = useState("1.0");
-  const [showAboutTheImages, setShowAboutTheImages] = useState(false);
+
   const [showWhy, setShowWhy] = useState(false);
   const [error, setError] = useState(false);
 
@@ -631,7 +631,6 @@ const App = () => {
                 if (e.target.id === "about-the-images") return;
                 setShowFooter(false);
                 setShowWhy(false);
-                setShowAboutTheImages(false);
               }}
             >
               <div>
@@ -643,7 +642,7 @@ const App = () => {
                       flexDirection: "column",
                     }}
                   >
-                    {!showAboutTheImages && !showWhy && (
+                    {!showWhy && (
                       <div
                         style={{
                           display: "flex",
@@ -660,7 +659,7 @@ const App = () => {
                             color: "white",
                             padding: "10px",
                             borderRadius: "10px",
-                            margin: "5px",
+                            margin: "5px 15px",
                             cursor: "pointer",
                             width: "100px",
                             textAlign: "center",
@@ -674,29 +673,11 @@ const App = () => {
                         </div>
                         <div
                           style={{
-                            backgroundColor: "black",
-                            color: "white",
-                            padding: "10px",
-                            borderRadius: "10px",
-                            margin: "5px",
-                            cursor: "pointer",
-                            width: "100px",
-                            textAlign: "center",
-                          }}
-                          onMouseDown={() => {
-                            setShowAboutTheImages(true);
-                          }}
-                          id="about-the-images"
-                        >
-                          About the images
-                        </div>
-                        <div
-                          style={{
                             backgroundColor: "#76A5BE",
                             color: "white",
                             padding: "10px",
                             borderRadius: "10px",
-                            margin: "5px",
+                            margin: "5px 15px",
                             cursor: "pointer",
                             width: "100px",
                             textAlign: "center",
@@ -713,17 +694,7 @@ const App = () => {
                         </div>
                       </div>
                     )}
-                    {showAboutTheImages && (
-                      <p style={{ textAlign: "center" }}>
-                        Real images provided by Unsplash under the
-                        <a href="https://unsplash.com/license">
-                          {" "}
-                          Unsplash License
-                        </a>
-                        . AI images from{" "}
-                        <a href="https://lexica.art/">Lexica.art</a>
-                      </p>
-                    )}
+
                     {showWhy && (
                       <div>
                         <p style={{ textAlign: "center" }}>
