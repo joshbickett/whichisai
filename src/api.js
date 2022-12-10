@@ -54,3 +54,11 @@ export const getNormalImages = async (search) => {
     resolve({ status, images });
   });
 };
+
+export const triggerUnsplashDownload = (endpoint) => {
+  return new Promise(async (resolve, reject) => {
+    const response = await fetch(endpoint + `&client_id=${key}`);
+    const data = await response.json();
+    resolve(data);
+  });
+};

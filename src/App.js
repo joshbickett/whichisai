@@ -2,7 +2,7 @@ import logo from "./assets/robot.png";
 import loadingImg from "./assets/loading.png";
 import "./App.css";
 import { useState, useRef, useCallback, useMemo, useEffect } from "react";
-import { getAIImage, getNormalImages } from "./api";
+import { getAIImage, getNormalImages, triggerUnsplashDownload } from "./api";
 import { getTopic } from "./topic";
 
 const App = () => {
@@ -125,6 +125,7 @@ const App = () => {
         originalSrc: img.links.html,
         unspashUser: img.user.name,
         unspashUserSrc: img.user.links.html,
+        downloadEndpoint: img.links.download_location,
       };
     });
 
@@ -208,6 +209,15 @@ const App = () => {
         disappearingScoreScale(i + 1);
       }, 50);
     }
+  };
+
+  const downloadImage = async (e, downloadEndpoint, visitURL) => {
+    e.preventDefault();
+    const imgObj = await triggerUnsplashDownload(downloadEndpoint);
+    console.log("[APP] image: ", imgObj);
+    const imgUrl = imgObj.url;
+    // visit the imgUrl
+    window.open(imgUrl, "_blank");
   };
 
   const lose = () => {
@@ -501,10 +511,23 @@ const App = () => {
                               info.style.opacity = "0";
                             }}
                           >
-                            <p style={{ textAlign: "center" }}>
-                              See <a href={image.originalSrc}>image</a>
+                            <p style={{ textAlign: "center", margin: "3px" }}>
+                              See <a href={image.originalSrc}>image</a> (
+                              <a
+                                href={"_"}
+                                onClick={(e) =>
+                                  downloadImage(
+                                    e,
+                                    image.downloadEndpoint,
+                                    image.originalSrc
+                                  )
+                                }
+                              >
+                                high quality
+                              </a>
+                              )
                             </p>
-                            <p style={{ textAlign: "center" }}>
+                            <p style={{ textAlign: "center", margin: "3px" }}>
                               By{" "}
                               <a href={image.unspashUserSrc + unspashUTM}>
                                 {image.unspashUser}
@@ -513,7 +536,6 @@ const App = () => {
                               <a href={"https://unsplash.com/" + unspashUTM}>
                                 Unspash
                               </a>
-                              .
                             </p>
                           </div>
                         )}
