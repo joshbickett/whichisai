@@ -93,7 +93,7 @@ const App = () => {
       if (tries > 0) {
         setTimeout(() => {
           tryForAIImages(topic, tries - 1);
-        }, 2000);
+        }, 4000);
       } else {
         setError(true);
         return [];
