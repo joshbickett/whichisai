@@ -52,7 +52,7 @@ const App = () => {
     let normalImgs = await tryForRealImages(topic, 3);
     console.log("got them back", normalImgs);
 
-    let aiImages = await tryForAIImages(topic);
+    let aiImages = await tryForAIImages(topic, 3);
 
     const imgs = createImgArray(normalImgs, aiImages);
 
