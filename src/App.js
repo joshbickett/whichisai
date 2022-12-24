@@ -628,6 +628,7 @@ const App = () => {
                 if (e.target.nodeName === "A") return;
                 if (e.target.id === "follow") return;
                 if (e.target.id === "why-game") return;
+                if (e.target.id === "github") return;
                 if (e.target.id === "about-the-images") return;
                 setShowFooter(false);
                 setShowWhy(false);
@@ -691,6 +692,27 @@ const App = () => {
                           id="follow"
                         >
                           Follow on Twitter
+                        </div>
+                        <div
+                          style={{
+                            backgroundColor: "#76A5BE",
+                            color: "white",
+                            padding: "10px",
+                            borderRadius: "10px",
+                            margin: "5px 15px",
+                            cursor: "pointer",
+                            width: "100px",
+                            textAlign: "center",
+                          }}
+                          onClick={() => {
+                            window.open(
+                              "https://github.com/joshbickett/whichisai",
+                              "_blank"
+                            );
+                          }}
+                          id="github"
+                        >
+                          Github
                         </div>
                       </div>
                     )}
