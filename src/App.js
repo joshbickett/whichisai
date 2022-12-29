@@ -762,8 +762,7 @@ const App = () => {
           <h5 style={{ margin: 0, padding: 0 }}>Which Is AI</h5>
 
           <p style={{ margin: "5px 0", padding: 0, textAlign: "center" }}>
-            We are currently experiencing technical issues. We are working on
-            fixing it now!
+            We can't handle all this traffic 😩 Please try again later
           </p>
         </div>
       )}
