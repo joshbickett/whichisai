@@ -1,4 +1,5 @@
-const key = process.env.REACT_APP_UNSPASH_KEY;
+const lexica_key = process.env.REACT_APP_LEXICA_KEY;
+const unsplash_key = process.env.REACT_APP_UNSPASH_KEY;
 
 const DEBUG = true;
 export const getAIImage = async (search) => {
@@ -8,8 +9,22 @@ export const getAIImage = async (search) => {
     if (DEBUG) console.log("[api] searchTerm", searchTerm);
 
     const url = `https://lexica.art/api/v1/search?q=${searchTerm}`;
+
     try {
-      const response = await fetch(url);
+      let cookies = { secret: lexica_key };
+      const cookieString = Object.entries(cookies)
+        .map(([key, value]) => `${key}=${value}`)
+        .join("; ");
+
+      const response = await fetch(url, {
+        method: "GET",
+        credentials: "same-origin",
+        headers: {
+          // Set the "Cookie" header to the cookie string
+          Cookie: cookieString,
+        },
+      });
+
       const data = await response.json();
 
       const images = data.images;
@@ -31,7 +46,7 @@ export const getAIImage = async (search) => {
 export const getNormalImages = async (search) => {
   if (DEBUG) console.log("[api] search.type", search.type);
 
-  const url = `https://api.unsplash.com/search/photos?query=${search.type}&client_id=${key}&content_filter=high&per_page=30`;
+  const url = `https://api.unsplash.com/search/photos?query=${search.type}&client_id=${unsplash_key}&content_filter=high&per_page=30`;
 
   // const url = `https://api.unsplash.com/search/photos?query=${search} cartoon&client_id=${key}`;
   // const url = `https://api.unsplash.com/search/photos?query=${search}&client_id=${key}`;
@@ -57,7 +72,7 @@ export const getNormalImages = async (search) => {
 
 export const triggerUnsplashDownload = (endpoint) => {
   return new Promise(async (resolve, reject) => {
-    const response = await fetch(endpoint + `&client_id=${key}`);
+    const response = await fetch(endpoint + `&client_id=${unsplash_key}`);
     const data = await response.json();
     resolve(data);
   });
