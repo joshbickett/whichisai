@@ -257,7 +257,7 @@ const App = () => {
                 }}
               />
               <h1 style={{ margin: 0, padding: 0 }}>Which Is AI</h1>
-              <h3 style={{ margin: "15px", padding: 0 }}>The game</h3>
+              <h3 style={{ margin: "15px", padding: 0 }}>The Game</h3>
               <p style={{ margin: "5px 0", padding: 0, textAlign: "center" }}>
                 Find the AI-generated image out of the set of real images
               </p>{" "}
