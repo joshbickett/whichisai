@@ -11,18 +11,17 @@ export const getAIImage = async (search) => {
     const url = `https://lexica.art/api/v1/search?q=${searchTerm}`;
 
     try {
-      let cookies = { secret: lexica_key };
-      const cookieString = Object.entries(cookies)
-        .map(([key, value]) => `${key}=${value}`)
-        .join("; ");
+      console.log("lexica key", lexica_key);
+
+      let cookies = { secret: "lexica_key" };
+
+      let headers = {
+        Cookie: `secret=${cookies.secret}`,
+      };
 
       const response = await fetch(url, {
         method: "GET",
-        credentials: "same-origin",
-        headers: {
-          // Set the "Cookie" header to the cookie string
-          Cookie: cookieString,
-        },
+        headers: headers,
       });
 
       const data = await response.json();
